@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 const { MONGODB_AUTH_SOURCE, MONGODB_DATABASE, MONGODB_PASSWORD, MONGODB_URL, MONGODB_USERNAME } = require('./env-constant');
 
-const mongoClientOptions = {
+const mongoClientOptions =  {
     authMechanism: "DEFAULT",
     authSource: MONGODB_AUTH_SOURCE,
     monitorCommands: true,
@@ -11,7 +11,7 @@ const mongoClientOptions = {
     }
 };
 
-const instance = new MongoClient(MONGODB_URL, mongoClientOptions);
+const instance =  process.env.NODE_ENV === 'test' ? new MongoClient(MONGODB_URL) : new MongoClient(MONGODB_URL, mongoClientOptions);
 
 const mongoClient = instance.connect();
 
