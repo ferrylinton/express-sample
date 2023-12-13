@@ -1,7 +1,15 @@
 const todoService = require('../services/todo-service');
 
+/**
+ * A controller that handles CRUD operations of Todo's data
+ * @author ferrylinton
+ * @module TodoController
+ */
 
-async function find(_req, res, next) {
+/**
+ * Get list of todoes
+ */
+exports.find = async (req, res, next) => {
     try {
         const todoes = await todoService.find()
         res.status(200).json(todoes);
@@ -10,7 +18,10 @@ async function find(_req, res, next) {
     }
 };
 
-async function findById(req, res, next) {
+/**
+ * Get todo by ID
+ */
+exports.findById = async (req, res, next) => {
     try {
         const todo = await todoService.findById(req.params._id);
         if (todo) {
@@ -23,21 +34,24 @@ async function findById(req, res, next) {
     }
 };
 
-async function create(req, res, next) {
+/**
+ * Create new todo
+ */
+exports.create = async (req, res, next) => {
     try {
-        const task = req.body.task;
-        const done = false;
-        const todo = await todoService.create({ task, done });
+        const todo = await todoService.create(req.body.task);
         res.status(201).json(todo);
     } catch (error) {
         next(error);
     }
 };
 
-async function update(req, res, next) {
+/**
+ * Update todo
+ */
+exports.update = async (req, res, next) => {
     try {
-        const task = req.body.task;
-        const done = req.body.done;
+        const { task, done } = req.body;
         const updateResult = await todoService.update(req.params._id, { task, done });
         res.status(200).json(updateResult)
     } catch (error) {
@@ -45,19 +59,14 @@ async function update(req, res, next) {
     }
 };
 
-async function deleteById(req, res, next) {
+/**
+ * Delete todo by ID
+ */
+exports.deleteById = async (req, res, next) => {
     try {
         const deleteResult = await todoService.deleteById(req.params._id);
         res.status(200).json(deleteResult)
     } catch (error) {
         next(error);
     }
-};
-
-module.exports = {
-    find,
-    findById,
-    create,
-    update,
-    deleteById
 };
