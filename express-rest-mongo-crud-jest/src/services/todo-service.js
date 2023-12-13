@@ -5,14 +5,7 @@ const TODO_COLLECTION = 'todo'
 
 const find = async () => {
     const todoCollection = await getCollection(TODO_COLLECTION);
-    const cursor = todoCollection.find().sort({ 'task': -1 });
-
-    const todos = [];
-    for await (const doc of cursor) {
-        todos.push(doc);
-    }
-
-    return todos;
+    return todoCollection.find({done: false}).sort({ 'task': -1 }).toArray();
 }
 
 const findById = async (_id) => {
@@ -23,7 +16,7 @@ const findById = async (_id) => {
 const create = async (todo) => {
     const todoCollection = await getCollection(TODO_COLLECTION);
     const insertOneResult = await todoCollection.insertOne(todo);
-    return { _id: insertOneResult.insertedId, ...todo };
+    return {...todo, _id: insertOneResult.insertedId };
 }
 
 const update = async (_id, todo) => {

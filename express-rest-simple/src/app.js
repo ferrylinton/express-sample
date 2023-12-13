@@ -1,9 +1,12 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
-const indexRouter = require('./routers/index-router')
+const indexRouter = require('./routers/index-router');
 
-const app = express(); // express instance
+/**
+ * Creates an Express application
+ */
+const app = express();
 
 // helmet helps secure Express apps by setting HTTP response headers
 app.use(helmet());
@@ -11,13 +14,22 @@ app.use(helmet());
 // enable CORS
 app.use(cors({ origin: '*' }));
 
-// parses incoming requests with JSON payloads and is based on body-parser 
+// parses incoming requests
 app.use(express.json());
-
-// parses incoming requests with URL-encoded payloads and is based on a body parser
 app.use(express.urlencoded({ extended: true }));
 
-// create a new router object in your application to handle requests
+// map router to express application
 app.use('/', indexRouter);
+
+// 404 / not found handler
+app.use((req, res, next) => {
+    res.status(404).json({ message: "Not Found" })
+})
+
+// error handler
+app.use((err, req, res, next) => {
+    console.error(err.stack)
+    res.status(500).json({ message: err.message })
+})
 
 module.exports = app;

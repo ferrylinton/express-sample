@@ -8,7 +8,7 @@ async function find(_req, res, next) {
     } catch (error) {
         next(error);
     }
-};
+}
 
 async function findById(req, res, next) {
     try {
@@ -21,7 +21,7 @@ async function findById(req, res, next) {
     } catch (error) {
         next(error);
     }
-};
+}
 
 async function create(req, res, next) {
     try {
@@ -32,7 +32,7 @@ async function create(req, res, next) {
     } catch (error) {
         next(error);
     }
-};
+}
 
 async function update(req, res, next) {
     try {
@@ -43,7 +43,7 @@ async function update(req, res, next) {
     } catch (error) {
         next(error);
     }
-};
+}
 
 async function deleteById(req, res, next) {
     try {
@@ -52,7 +52,7 @@ async function deleteById(req, res, next) {
     } catch (error) {
         next(error);
     }
-};
+}
 
 module.exports = {
     find,
