@@ -1,30 +1,17 @@
 const assert = require('assert');
 const request = require('supertest');
 const app = require('../../src/app');
-const { MongoMemoryServer } = require('mongodb-memory-server');
-const { mongoClient } = require('../../src/configs/mongodb');
+const { startMongoServer, stopMongoServer } = require('../libs/mongo-test-util');
 
+beforeAll(async () => {
+    await startMongoServer();
+});
+
+afterAll(async () => {
+    await stopMongoServer();
+});
 
 describe('/api/todoes', () => {
-
-    let mongoServer;
-
-    beforeAll(async () => {
-        mongoServer = new MongoMemoryServer({
-            instance: {
-                port: 27017,
-                dbName: 'blogdb'
-            }
-        })
-
-        await mongoServer.start();
-    });
-
-    afterAll(async () => {
-        const connection = await mongoClient;
-        connection.close();
-        await mongoServer.stop();
-    });
 
     let _id = '0';
 
@@ -32,18 +19,18 @@ describe('/api/todoes', () => {
 
         it('should create a task', async function () {
             const response = await request(app)
-                .post('/api/todoes')       // memanggil path '/'
+                .post('/api/todoes') 
                 .send({ task: 'test' })
                 .set('Accept', 'application/json')
-                .expect(201);   // cek status = 201
-            
-            _id = response.body._id;
-            assert(response.body.task, 'test'); // cek di response, message = 'OK'
+                .expect(201); 
+
+            _id = response.body.insertedId;
+            assert(response.body.acknowledged, true);
         });
 
     });
 
-    describe('GET /api/todoes/:id', function () {
+    describe('GET /api/todoes/:_id', function () {
 
         it('should return a task', async function () {
             const response = await request(app)
@@ -67,7 +54,7 @@ describe('/api/todoes', () => {
 
     });
 
-    describe('PUT /api/todoes/:id', function () {
+    describe('PUT /api/todoes/:_id', function () {
 
         it('should update task', async function () {
             const response = await request(app)
@@ -80,7 +67,7 @@ describe('/api/todoes', () => {
 
     });
 
-    describe('DELETE /api/todoes/:id', function () {
+    describe('DELETE /api/todoes/:_id', function () {
 
         it('should update task', async function () {
             const response = await request(app)
@@ -92,10 +79,10 @@ describe('/api/todoes', () => {
 
     });
 
-    describe('GET /api/todoes/:id', function () {
+    describe('GET (404) /api/todoes/:_id', function () {
 
         it('should return 404', async function () {
-            const response = await request(app)
+            await request(app)
                 .get('/api/todoes/' + _id)
                 .set('Accept', 'application/json')
                 .expect(404);
