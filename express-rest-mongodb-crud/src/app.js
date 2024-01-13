@@ -1,7 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
-const helloRouter = require('./routers/hello-router');
+const todoRouter = require('./routers/todo-router');
 
 /**
  * Creates an Express application
@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // map router to express application
-app.use('/', helloRouter);
+app.use('/', todoRouter);
 
 // 404 / not found handler
 app.use((req, res, next) => {

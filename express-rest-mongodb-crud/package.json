@@ -1,22 +1,22 @@
 {
-  "name": "express-rest-simple",
+  "name": "express-rest-mongo-crud",
   "version": "1.0.0",
-  "description": "Simple Example of a REST Application Using Express JS",
+  "description": "Simple Express REST CRUD Application",
   "main": "src/server.js",
   "scripts": {
+    "start": "node src/server.js",
     "dev": "nodemon"
   },
   "keywords": [
-    "express"
+    "express",
+    "mongodb"
   ],
   "author": "Ferry L. H.",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "helmet": "^7.1.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.2"
+    "helmet": "^7.1.0",
+    "mongodb": "^6.3.0"
   }
 }

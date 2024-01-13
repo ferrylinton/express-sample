@@ -1,0 +1,31 @@
+{
+	/* Instructs the TypeScript compiler how to compile .ts files. */
+	"compilerOptions": {
+
+		/* Specify an output folder for all emitted files. */
+		"outDir": "./dist", 
+
+		/* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+		"target": "es2016", 
+
+		/* Specify what module code is generated. */
+		"module": "commonjs", 
+
+		/* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
+		"esModuleInterop": true, 
+		
+		/* Ensure that casing is correct in imports. */
+		"forceConsistentCasingInFileNames": true, 
+		
+		/* Enable all strict type-checking options. */
+		"strict": true, 
+
+		/* Skip type checking all .d.ts files. */
+		"skipLibCheck": true 
+	},
+
+	/* Specifies a list of glob patterns that match files to be included in compilation */
+	"include": [
+		"src/**/*.ts"
+	],
+}
