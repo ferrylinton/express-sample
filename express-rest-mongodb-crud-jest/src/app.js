@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // map router to express application
-app.use('/api/todoes', todoRouter);
+app.use('/', todoRouter);
 
 // 404 / not found handler
 app.use((req, res, next) => {

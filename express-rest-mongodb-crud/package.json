@@ -1,7 +1,7 @@
 {
   "name": "express-rest-mongo-crud",
   "version": "1.0.0",
-  "description": "Simple Express REST CRUD Application",
+  "description": "Simple Example of a REST Application Using Express JS",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",

@@ -1,12 +1,5 @@
 const { MongoClient } = require('mongodb');
 
-const MONGODB_AUTH_SOURCE = "admin";
-const MONGODB_DATABASE = "admin";
-const MONGODB_HOST = "127.0.0.1";
-const MONGODB_PORT = process.env.NODE_ENV === 'test' ? "27018" : "27017";
-const MONGODB_USERNAME = "admin";
-const MONGODB_PASSWORD = "password";
-
 /**
  * Module that provides mongodb connection
  * @author ferrylinton
@@ -17,6 +10,28 @@ const MONGODB_PASSWORD = "password";
 /** @typedef {import("mongodb").MongoClientOptions} MongoClientOptions */
 /** @typedef {import("mongodb").Collection} Collection */
 
+
+const MONGODB_AUTH_SOURCE = "admin";
+const MONGODB_DATABASE = "admin";
+const MONGODB_HOST = "127.0.0.1";
+const MONGODB_PORT = process.env.NODE_ENV === 'test' ? "27018" : "27017";
+const MONGODB_USERNAME = "admin";
+const MONGODB_PASSWORD = "password";
+
+/**
+ * @constant {MongoClientOptions} mongoClientOptions - Query options for the mongo client
+ * @see https://www.mongodb.com/docs/manual/reference/connection-string
+ */
+const mongoClientOptions = {
+	authMechanism: 'DEFAULT',
+	authSource: MONGODB_AUTH_SOURCE,
+	monitorCommands: process.env.NODE_ENV !== 'test',
+	auth: {
+		username: MONGODB_USERNAME,
+		password: MONGODB_PASSWORD,
+	},
+};
+
 /**
  * @type {Promise<MongoClient>}
  */
@@ -25,22 +40,9 @@ let mongoClient;
 /**
  * Get instance of MongoClient
  * @returns {MongoClient}
+ * @see https://www.mongodb.com/docs/drivers/node/current/quick-start/create-a-connection-string/
  */
 const getMongoClientInstance = () => {
-	
-	/**
-	 * @constant {MongoClientOptions} mongoClientOptions - Query options for the mongo client
-	 * @see https://www.mongodb.com/docs/manual/reference/connection-string
-	 */
-	const mongoClientOptions = {
-		authMechanism: 'DEFAULT',
-		authSource: MONGODB_AUTH_SOURCE,
-		monitorCommands: true,
-		auth: {
-			username: MONGODB_USERNAME,
-			password: MONGODB_PASSWORD,
-		},
-	};
 
 	/**
 	 * @constant {string} mongodbURL
@@ -48,22 +50,29 @@ const getMongoClientInstance = () => {
 	const mongodbURL = `mongodb://${MONGODB_HOST}:${MONGODB_PORT}`;
 
 	/**
-	 * @constant {MongoClient} instance - The MongoClient class
-	 * @see https://www.mongodb.com/docs/drivers/node/current/quick-start/create-a-connection-string/
+	 * @constant {MongoClient} instance
 	 */
 	const instance = new MongoClient(mongodbURL, mongoClientOptions);
 
-	// Record connection pool events in application.
-	// Check this https://www.mongodb.com/docs/drivers/node/current/fundamentals/monitoring/connection-monitoring/
-	instance.on('connectionPoolCreated', event =>
-		console.log(`[MONGODB] ${JSON.stringify(event)}`)
-	);
-	instance.on('connectionPoolReady', event => console.log(`[MONGODB] ${JSON.stringify(event)}`));
-	instance.on('connectionCreated', event => console.log(`[MONGODB] ${JSON.stringify(event)}`));
-	instance.on('connectionClosed', event => console.log(`[MONGODB] ${JSON.stringify(event)}`));
+	connectionPoolMonitoring(instance);
 
 	return instance;
 };
+
+/**
+ * Record connection pool events in application.
+ * @param instance {MongoClient} - Instance of MongoClient
+ * @see https://www.mongodb.com/docs/drivers/node/current/fundamentals/monitoring/connection-monitoring/
+ */
+const connectionPoolMonitoring = (instance) => {
+	if (process.env.NODE_ENV !== 'test') {
+		instance.on('connectionPoolCreated', (event) => console.log(`[MONGODB] ${JSON.stringify(event)}`));
+		instance.on('connectionPoolReady', (event) => console.log(`[MONGODB] ${JSON.stringify(event)}`));
+		instance.on('connectionCreated', (event) => console.log(`[MONGODB] ${JSON.stringify(event)}`));
+		instance.on('connectionClosed', (event) => console.log(`[MONGODB] ${JSON.stringify(event)}`));
+		instance.on('commandStarted', started => console.log(started));
+	}
+}
 
 /**
  * Get Promise of MongoClient from MongoClient instance
@@ -71,13 +80,7 @@ const getMongoClientInstance = () => {
  */
 exports.getMongoClient = async () => {
 	if (mongoClient === null || mongoClient === undefined) {
-		try {
-			mongoClient = getMongoClientInstance().connect();
-		} catch (error) {
-			mongoClient = null;
-			console.log(error);
-		}
-
+		mongoClient = getMongoClientInstance().connect();
 		return mongoClient;
 	}
 
@@ -91,11 +94,6 @@ exports.getMongoClient = async () => {
  */
 exports.getCollection = async name => {
 	const connection = await this.getMongoClient();
-
-	if (connection) {
-		const db = connection.db(MONGODB_DATABASE);
-		return db.collection(name);
-	} else {
-		throw new Error('No mongodb connection');
-	}
+	const db = connection.db(MONGODB_DATABASE);
+	return db.collection(name);
 };

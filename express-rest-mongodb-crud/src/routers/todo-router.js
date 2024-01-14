@@ -1,4 +1,5 @@
 const express = require('express');
+const todoService = require('../services/todo-service');
 
 /**
  * A router that handles Todo REST API
@@ -98,7 +99,7 @@ const router = express.Router();
 
 router.get('/api/todoes', getTodoesHandler);
 router.post('/api/todoes', postTodoHandler);
-router.get("/api/todoes:_id", getTodoByIdHandler);
+router.get("/api/todoes/:_id", getTodoByIdHandler);
 router.put("/api/todoes/:_id", putTodoHandler);
 router.delete("/api/todoes/:_id", deleteTodoHandler);
 
