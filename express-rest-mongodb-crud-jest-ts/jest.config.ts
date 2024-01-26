@@ -7,6 +7,18 @@ import type { Config } from 'jest';
 
 const config: Config = {
 
+	// Set of files for which coverage information should be collected
+	collectCoverageFrom: [
+		'<rootDir>/src/**/*.ts',
+		'!<rootDir>/test/**'
+	],
+
+	// Coverage information will be skipped
+	coveragePathIgnorePatterns: [
+		"<rootDir>/src/server.ts",
+		"<rootDir>/src/types",
+	],
+
 	// Base for Jest's configuration
 	preset: 'ts-jest',
 
@@ -25,7 +37,7 @@ const config: Config = {
 	// Indicates which provider should be used to instrument code for coverage
 	coverageProvider: "v8",
 
-	setupFiles: ["<rootDir>/test/setEnvVars.ts"]
+	setupFiles: ["<rootDir>/test/set-env-vars.ts"]
 
 };
 

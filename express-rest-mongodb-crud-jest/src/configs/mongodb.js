@@ -66,11 +66,21 @@ const getMongoClientInstance = () => {
  */
 const connectionPoolMonitoring = (instance) => {
 	if (process.env.NODE_ENV !== 'test') {
-		instance.on('connectionPoolCreated', (event) => console.log(`[MONGODB] ${JSON.stringify(event)}`));
-		instance.on('connectionPoolReady', (event) => console.log(`[MONGODB] ${JSON.stringify(event)}`));
-		instance.on('connectionCreated', (event) => console.log(`[MONGODB] ${JSON.stringify(event)}`));
-		instance.on('connectionClosed', (event) => console.log(`[MONGODB] ${JSON.stringify(event)}`));
-		instance.on('commandStarted', started => console.log(started));
+		const eventNames = [
+			'connectionPoolCreated',
+			'connectionPoolReady',
+			'connectionCreated',
+			'connectionClosed',
+			'commandStarted',
+			'commandSucceeded',
+			'commandFailed'
+		]
+
+		for (let eventName of eventNames) {
+			instance.on(eventName, (event) => {
+				console.log(`[MONGODB] ${JSON.stringify(event)}`)
+			});
+		}
 	}
 }
 

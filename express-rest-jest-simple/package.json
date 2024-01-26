@@ -1,12 +1,12 @@
 {
   "name": "express-rest-jest-simple",
   "version": "1.0.0",
-  "description": "Simple Example of a REST Application Using Express JS",
+  "description": "Simple Example of Unit Test Using JEST and Express JS",
   "main": "src/server.js",
   "scripts": {
     "start": "src/server.js",
     "dev": "nodemon",
-    "test": "jest --runInBand --detectOpenHandles --forceExit"
+    "test": "jest"
   },
   "keywords": [
     "express"

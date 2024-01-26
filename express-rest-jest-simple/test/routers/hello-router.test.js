@@ -3,7 +3,6 @@ const request =  require('supertest');
 const app =  require('../../src/app');
 const { getMessage } =  require('../../src/services/hello-service');
 
-
 describe('/api/hello', () => {
 
     describe('GET /api/hello?name', function () {

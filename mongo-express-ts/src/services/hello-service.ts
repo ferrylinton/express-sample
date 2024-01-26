@@ -5,15 +5,15 @@
  */
 
 /**
- * Generates a message with the input name
+ * Generates a message from input name
  * @param name {string} - Input name
  * @returns {string} The message
  * @throws {Error} Throw error if message is empty
  */
-exports.getMessage = (name) => {
+export function getMessage(name: string): string {
     if (!name || name.trim() === '') {
         throw new Error('Name is empty')
-    }else{
+    } else {
         return `Horas ${name} !!`;
     }
 }
