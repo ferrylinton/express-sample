@@ -1,0 +1,23 @@
+:root{
+    --body-bg : #ffffff;
+    --body-text : #272b30; 
+	--primary: #4e9d4e;
+    --secondary: #7a8288;
+
+    --navbar-bg: #eceef0;
+    --navbar-border: #d8d9da;
+    --font-batak: #be2626;
+}
+
+.dark{
+    --body-bg : #272b30;
+    --body-text : #ffffff; 
+    --primary: #4e9d4e;
+    --secondary: #7a8288;
+
+    --navbar-bg: #3a3f44;
+    --navbar-border: #4f5559;
+    --font-batak: #be2626;
+}
+
+
