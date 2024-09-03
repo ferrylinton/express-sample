@@ -8,7 +8,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
-        clean: true,
+        clean: false,
     },
 
     resolve: {
@@ -49,7 +49,6 @@ module.exports = {
     plugins: [
         new HtmlBundlerPlugin({
             entry: 'src',
-            filename: '[name].hbs',
             js: {
                 filename: '[name].[contenthash:8].js',
                 outputPath: 'assets/js/',

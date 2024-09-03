@@ -6,11 +6,13 @@ import { create } from 'express-handlebars';
 import helmet from 'helmet';
 import homeRouter from '@/routers/home-router';
 
-const hbs = create({
-    layoutsDir: path.join(process.cwd(), 'dist', 'views', 'layouts'),
-    partialsDir: path.join(process.cwd(), 'dist', 'views', 'partials'),
+const VIEWS_FOLDER = path.join(__dirname, 'views');
+
+const handlebars = create({
+    layoutsDir: path.join(VIEWS_FOLDER, 'layouts'),
+    partialsDir: path.join(VIEWS_FOLDER, 'partials'),
     defaultLayout: 'main',
-    extname: '.hbs'
+    extname: 'html'
 });
 
 /**
@@ -19,15 +21,16 @@ const hbs = create({
 const app = express();
 
 app.set('trust proxy', 1);
-app.use(favicon(__dirname + '/favicon.ico'));
+app.use(favicon(path.join(__dirname, 'favicon.ico')));
 
 // set assets url
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 // hbs config
-app.engine('.hbs', hbs.engine);
-app.set('views', path.join(process.cwd(), 'dist', 'views'));
-app.set('view engine', 'hbs');
+app.engine('html', handlebars.engine);
+app.set('view engine', 'html');
+app.set('views', VIEWS_FOLDER);
+
 
 // helmet helps secure Express apps by setting HTTP response headers
 app.use(helmet({ contentSecurityPolicy: false, }));
@@ -43,7 +46,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', homeRouter);
 
 // 404 / not found handler
-app.use((_req: Request, res: Response, next: NextFunction) => {
+app.use((_req: Request, res: Response, _next: NextFunction) => {
     res.status(404).json({ message: "Not Found" })
 })
 

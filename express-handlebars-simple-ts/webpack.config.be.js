@@ -1,19 +1,22 @@
 const path = require('path');
-const nodeExternals = require('webpack-node-externals');
 const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 
-module.exports = (env, argv) => {
+module.exports = (_env, argv) => {
     return {
         entry: './src/server.ts',
         target: 'node',
+
         output: {
             path: path.resolve(__dirname, 'dist'),
-            filename: 'server.js'
+            filename: 'server.js',
+            clean: false
         },
-     
+
         resolve: {
             alias: {
                 "@": path.resolve(__dirname, "src"),
+                 'handlebars' : 'handlebars/dist/handlebars.js'
+
             },
             modules: [
                 "node_modules"
@@ -25,7 +28,7 @@ module.exports = (env, argv) => {
             rules: [
                 {
                     test: /\.ts?$/,
-                    use: 'ts-loader',
+                    use: ['ts-loader'],
                     exclude: /node_modules/,
                 },
             ],

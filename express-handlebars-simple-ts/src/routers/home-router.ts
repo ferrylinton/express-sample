@@ -3,7 +3,7 @@ import express, { NextFunction, Request, Response } from 'express';
 
 const homeHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        res.render('home');
+        res.render('home', {message : "Salam perdamaian !!"});
     } catch (error) {
         next(error);
     }
