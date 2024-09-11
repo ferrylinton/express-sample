@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Example App</title>
+    <link href="@src/favicon.ico" rel="icon" />
+    <link href="@src/assets/css/index.css" rel="stylesheet" />
+</head>
+
+<body>
+    {{> sidebar}}
+    <main class="main">
+        <nav class="nav">
+            <button class="sidebar-open toggle-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="logo">TODO LIST</div>
+        </nav>
+        <div class="main-content">
+            {{{body}}}
+        </div>
+        {{> footer}}
+    </main>
+    <script src="@src/assets/js/index.ts" defer="defer"></script>
+</body>
+
+</html>

@@ -9,22 +9,31 @@ module.exports = (_env, argv) => {
 
     return {
 
-        target: "web",
+        target: "node",
 
         output: {
             path: path.resolve(__dirname, "dist"),
-            publicPath: "/",
-            clean: false,
+            publicPath: "/"
+        },
+
+        watchOptions: {
+            ignored: ["server.ts", "app.ts", "**/config", "**/routers", "**/services", "**/types", "**/node_modules"],
         },
 
         resolve: {
             alias: {
                 "@src": path.join(__dirname, "src"),
             },
+            extensions: [".js", ".ts"],
         },
 
         module: {
             rules: [
+                {
+                    test: /\.ts?$/,
+                    use: ["ts-loader"],
+                    exclude: /node_modules/,
+                },
                 {
                     test: /\.css$/,
                     use: ["css-loader", "postcss-loader"]

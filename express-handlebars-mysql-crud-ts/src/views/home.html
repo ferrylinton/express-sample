@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="todo-list-toolbar">
+        <div class="total">Total : 10</div>
+        <a href="/add" class="btn btn-primary">ADD</a>
+    </div>
+    <div class="todo-list">
+        <table>
+            {{#each todoes}}
+            <tr>
+                <td>{{inc @key}}</td>
+                <td>
+                    <span>{{task}}</span>
+                    <em>{{created_at}}</em>
+                </td>
+                <td>
+                    <div class="action">
+                        <button class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M9 22l-10-10.598 2.798-2.859 7.149 7.473 13.144-14.016 2.909 2.806z" />
+                            </svg>
+                        </button>
+                        <a href="{{concat '/' id}}" class="btn btn-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path
+                                    d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z" />
+                            </svg>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+
+</div>

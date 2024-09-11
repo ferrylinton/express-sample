@@ -1,0 +1,10 @@
+{
+  "watch": [
+    "./dist/**"
+  ],
+  "ignore": [
+    "*.log"
+  ],
+  "delay": "2500",
+  "exec": "node ./dist/server.js"
+}

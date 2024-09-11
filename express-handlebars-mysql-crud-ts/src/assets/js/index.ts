@@ -1,7 +1,9 @@
-const { sayHello } = require('./common');
+import { Sidebar } from "@src/assets/js/sidebar";
+import { Todo } from "@src/assets/js/todo";
 
 document.addEventListener("DOMContentLoaded", function () {
     if (document.readyState === "interactive" || document.readyState === "complete") {
-        document.getElementById('message').innerText = sayHello();
+        Sidebar.init();
+        Todo.init();
     }
 });

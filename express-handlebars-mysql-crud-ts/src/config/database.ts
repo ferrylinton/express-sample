@@ -1,5 +1,5 @@
 import mysql from 'mysql2/promise';
-import * as env from "@/config/env-constant";
+import * as env from "@src/config/env-constant";
 import { Pool } from 'mysql2/typings/mysql/lib/Pool';
 
 const pool = mysql.createPool({

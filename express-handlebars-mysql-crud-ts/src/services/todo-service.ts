@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import pool from '@/config/database';
-import { Todo, UpdateTodo } from '@/types/todo-type';
+import pool from '@src/config/database';
+import { Todo, UpdateTodo } from '@src/types/todo-type';
 import { ResultSetHeader, RowDataPacket } from 'mysql2';
 
 /**

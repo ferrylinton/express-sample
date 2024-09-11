@@ -1,23 +1,28 @@
 :root{
-    --body-bg : #ffffff;
-    --body-text : #272b30; 
-	--primary: #4e9d4e;
-    --secondary: #7a8288;
+    --primary: hsl(231, 48%, 48%);
+    --primary-lighter : #c5cae9;
+    --primary-text: #212121;
+    --secondary: #757575;
+    --secondary-text: #757575;
+    --text: hsl(0, 0%, 100%);
+    --accent: #8bc34a;
+    --divider: #BDBDBD;
+    --border-color: #dedede;
 
-    --navbar-bg: #eceef0;
-    --navbar-border: #d8d9da;
-    --font-batak: #be2626;
+    --base: hsl(0, 0%, 100%);
+    --base-h : 0;
+    --base-s : 0%;
+    --base-l : 100%;
+    --scrollbar: hsla(var(--base-h), var(--base-s), 50%, 1);
+    --scrollbar-track: hsla(var(--base-h), var(--base-s), 90%, 1);
 }
 
 .dark{
-    --body-bg : #272b30;
-    --body-text : #ffffff; 
-    --primary: #4e9d4e;
-    --secondary: #7a8288;
+    --base: hsl(213, 10%, 17%);
+    --base-h : 213;
+    --base-s : 10%;
+    --base-l : 17%;
 
-    --navbar-bg: #3a3f44;
-    --navbar-border: #4f5559;
-    --font-batak: #be2626;
+    --secondary: hsla(var(--base-h), var(--base-s), 50%, 1);
+    --text-color: hsl(0, 0%, 90%);
 }
-
-

@@ -1,0 +1,144 @@
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: baseline;
+    align-items: center;
+}
+
+.todo-list-toolbar{
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 0.5rem;
+    margin: 2rem 0 0.5rem 0;
+}
+
+.todo-list-toolbar .total{
+    line-height: 1;
+    font-size: 1.3rem;
+    font-weight: lighter;
+}
+
+.todo-list-toolbar .btn{
+    min-width: 100px;
+}
+
+.todo-list, .todo-detail {
+    width: 100%;
+    border-radius: 0.5em;
+    border: solid 1px var(--border-color);
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+}
+
+.todo-list table, .todo-detail table{
+    width: 100%;
+}
+
+.todo-list tr:not(:last-child), .todo-detail tr:not(:last-child){
+    border-bottom: solid 1px var(--border-color);
+}
+
+.todo-list tr:nth-child(odd), .todo-detail tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.todo-list tr:nth-child(even), .todo-detail tr:nth-child(even) {
+    background-color: #f7f7f7;
+}
+
+.todo-list tr td, .todo-detail tr td {
+    vertical-align: middle;
+}
+
+.todo-list tr td:nth-child(1) {
+    width: 50px;
+    text-align: center;
+}
+
+.todo-list tr td:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px 8px 8px 0;
+}
+
+.todo-list tr td em,
+.todo-list tr td span {
+    line-height: 1;
+    word-break: break-all;
+}
+
+.todo-list tr td:nth-child(2) em {
+    font-size: .7rem;
+    color: var(--secondary-text);
+}
+
+.todo-list tr td:nth-child(3) {
+    width: 90px;
+}
+
+.todo-list .action {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+}
+
+.todo-detail tr th{
+    font-weight: bold;
+    text-align: right;
+    padding: 0.5rem;
+}
+
+.todo-detail tr td{
+    text-align: left;
+    padding: 0.5rem;
+}
+
+.todo-detail tr td::before{
+    content: ":";
+    display: inline-block;
+    width: 1rem;
+    text-align: left;
+}
+
+.buttons{
+    width: 100%;
+}
+
+.buttons .btn{
+    min-width: 100px;
+}
+
+.todo-form{
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+.todo-form input[type="text"]{
+    font-size: 16px;
+    line-height: 28px;
+    padding: 8px 16px;
+    width: 100%;
+    min-height: 44px;
+    border: unset;
+    border-radius: 4px;
+    outline-color: rgb(84 105 212 / 0.5);
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(60, 66, 87, 0.16) 0px 0px 0px 1px, 
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+}
+
+.todo-form .btn, .todo-detail .btn{
+    min-width: 100px;
+}

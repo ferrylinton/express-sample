@@ -1,9 +1,13 @@
+import { NODE_ENV } from '@src/config/env-constant';
 import express, { NextFunction, Request, Response } from 'express';
 
 
 const homeHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        res.render('home', {message : "Salam perdamaian !!"});
+        res.render('home', {
+            NODE_ENV,
+            message : "Salam perdamaian !!"
+        });
     } catch (error) {
         next(error);
     }

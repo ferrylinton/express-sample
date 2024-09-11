@@ -4,7 +4,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import favicon from 'express-favicon';
 import { create } from 'express-handlebars';
 import helmet from 'helmet';
-import homeRouter from '@/routers/home-router';
+import homeRouter from '@src/routers/home-router';
 
 const VIEWS_FOLDER = path.join(__dirname, 'views');
 

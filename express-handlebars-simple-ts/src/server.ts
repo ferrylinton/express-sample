@@ -1,4 +1,4 @@
-import app from './app';
+import app from '@src/app';
 
 /**
  * @constant {number} express application running on this port number
