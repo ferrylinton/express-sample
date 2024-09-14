@@ -3,11 +3,10 @@
     --primary-lighter : #c5cae9;
     --primary-text: #212121;
     --secondary: #757575;
-    --secondary-text: #757575;
     --text: hsl(0, 0%, 100%);
     --accent: #8bc34a;
-    --divider: #BDBDBD;
     --border-color: #dedede;
+    --danger: #f44336;
 
     --base: hsl(0, 0%, 100%);
     --base-h : 0;

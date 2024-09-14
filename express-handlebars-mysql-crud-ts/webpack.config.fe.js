@@ -9,8 +9,6 @@ module.exports = (_env, argv) => {
 
     return {
 
-        target: "node",
-
         output: {
             path: path.resolve(__dirname, "dist"),
             publicPath: "/"

@@ -1,4 +1,5 @@
 <div class="container">
+    {{#if todo}}
     <div class="todo-detail">
         <table>
             <tbody>
@@ -16,17 +17,19 @@
                 </tr>
                 <tr>
                     <th>Created At</th>
-                    <td>{{todo.created_at}}</td>
+                    <td data-convertToDate>{{todo.created_at}}</td>
                 </tr>
                 <tr>
                     <th>Updated At</th>
-                    <td>{{todo.updated_at}}</td>
+                    <td data-convertToDate>{{todo.updated_at}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
+    {{/if}}
     <section class="buttons">
         <a href="/" class="btn btn-secondary">Back</a>
-        <button type="button" class="btn btn-secondary">Delete</button>
+        <button type="button" class="btn btn-danger" data-delete="{{todo.id}}">Delete</button>
     </section>
 </div>
+{{> confirm confirmMessage="Delete task?"}}

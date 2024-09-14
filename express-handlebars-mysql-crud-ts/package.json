@@ -43,6 +43,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "axios": "^1.7.7",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "date-fns": "^3.6.0",
@@ -52,6 +53,7 @@
     "express-handlebars": "^8.0.1",
     "helmet": "^7.1.0",
     "mysql2": "^3.11.0",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "zod": "^3.23.8"
   }
 }

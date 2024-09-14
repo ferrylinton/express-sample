@@ -20,6 +20,11 @@
             <div class="logo">TODO LIST</div>
         </nav>
         <div class="main-content">
+            {{#if error}}
+            <div class="alert alert-danger">
+                {{error.message}}{{id}} {{op}}
+            </div>
+            {{/if}}
             {{{body}}}
         </div>
         {{> footer}}

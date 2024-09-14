@@ -1,20 +1,21 @@
 <div class="container">
     <div class="todo-list-toolbar">
-        <div class="total">Total : 10</div>
+        <div class="total">Total : {{total}}</div>
         <a href="/add" class="btn btn-primary">ADD</a>
     </div>
     <div class="todo-list">
+        {{#if todoes}}
         <table>
             {{#each todoes}}
-            <tr>
+            <tr class="{{clazz 'task-done' done }}">
                 <td>{{inc @key}}</td>
                 <td>
                     <span>{{task}}</span>
-                    <em>{{created_at}}</em>
+                    <em data-convertToDate>{{created_at}}</em>
                 </td>
                 <td>
                     <div class="action">
-                        <button class="btn btn-primary">
+                        <button class="btn btn-primary" data-update="{{id}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path d="M9 22l-10-10.598 2.798-2.859 7.149 7.473 13.144-14.016 2.909 2.806z" />
                             </svg>
@@ -30,6 +31,9 @@
             </tr>
             {{/each}}
         </table>
+        {{else}}
+        <div class="no-records">No records is found</div>
+        {{/if}}
     </div>
-
 </div>
+{{> confirm confirmMessage="Update task?"}}

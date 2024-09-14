@@ -38,6 +38,14 @@
     width: 100%;
 }
 
+.todo-list .task-done td span{
+    text-decoration: line-through;
+}
+
+.todo-list .task-done [data-update]{
+    display: none;
+}
+
 .todo-list tr:not(:last-child), .todo-detail tr:not(:last-child){
     border-bottom: solid 1px var(--border-color);
 }
@@ -74,7 +82,7 @@
 
 .todo-list tr td:nth-child(2) em {
     font-size: .7rem;
-    color: var(--secondary-text);
+    color: var(--secondary);
 }
 
 .todo-list tr td:nth-child(3) {
@@ -82,8 +90,9 @@
 }
 
 .todo-list .action {
+    padding-right: 1rem;
     display: flex;
-    justify-content: center;
+    justify-content: end;
     gap: 4px;
 }
 
@@ -107,6 +116,7 @@
 
 .buttons{
     width: 100%;
+    padding: 1rem;
 }
 
 .buttons .btn{
@@ -139,6 +149,17 @@
                 rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
 
+.todo-form label{
+    padding: 0 0.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
 .todo-form .btn, .todo-detail .btn{
     min-width: 100px;
+}
+
+.no-records{
+    padding: 1rem;
 }

@@ -30,8 +30,13 @@ import { ResultSetHeader, RowDataPacket } from 'mysql2';
  *
  */
 export const find = async () => {
-	const [todoes] = await pool.query<RowDataPacket[]>('SELECT * FROM todo');
+	const [todoes] = await pool.query<RowDataPacket[]>('SELECT * FROM todo order by created_at desc');
     return todoes;
+};
+
+export const count = async () => {
+	const [rows] = await pool.query<RowDataPacket[]>('SELECT count(id) as total FROM todo');
+    return rows[0].total;
 };
 
 /**

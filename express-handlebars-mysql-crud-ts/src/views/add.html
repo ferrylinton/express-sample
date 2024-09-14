@@ -1,8 +1,17 @@
 <div class="container">
+    {{#if errorValidations}}
+    <div class="alert alert-danger">
+        <ul>
+            {{#each errorValidations}}
+            <li>{{this.path}} : {{this.message}}</li>
+            {{/each}}
+        </ul>
+    </div>
+    {{/if}}
     <form method="post" action="/" autocomplete="off" class="todo-form">
         <div class="form-group">
             <label>Task</label>
-            <input name="task" type="text" autocomplete="off" maxlength="100" />
+            <input name="task" type="text" autocomplete="off" maxlength="100" placeholder="Task" />
         </div>
         <section class="buttons">
             <a href="/" class="btn btn-secondary">Back</a>
