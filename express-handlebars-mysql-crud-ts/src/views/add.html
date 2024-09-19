@@ -3,20 +3,24 @@
     <div class="alert alert-danger">
         <ul>
             {{#each errorValidations}}
-            <li>{{this.path}} : {{this.message}}</li>
+            <li>{{t this.path.[0]}} : {{t this.message}}</li>
             {{/each}}
         </ul>
     </div>
     {{/if}}
-    <form method="post" action="/" autocomplete="off" class="todo-form">
+    {{#if errorMaxData}}
+    <div class="alert alert-danger">
+       {{t errorMaxData}}
+    </div>
+    {{/if}}
+    <form method="post" action="/add" autocomplete="off" class="todo-form">
         <div class="form-group">
-            <label>Task</label>
-            <input name="task" type="text" autocomplete="off" maxlength="100" placeholder="Task" />
+            <label>{{t "task"}}</label>
+            <input name="task" type="text" autocomplete="off" maxlength="100" placeholder='{{t "task"}}' autofocus />
         </div>
         <section class="buttons">
-            <a href="/" class="btn btn-secondary">Back</a>
-            <button type="reset" class="btn btn-secondary">Reset</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="/" class="btn btn-secondary">{{t "back"}}</a>
+            <button type="submit" class="btn btn-primary">{{t "save"}}</button>
         </section>
     </form>
 </div>

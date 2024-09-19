@@ -2,17 +2,20 @@ import * as todoService from '@src/services/todo-service';
 import { CreateTodoSchema } from '@src/validations/TodoSchema';
 import express, { NextFunction, Request, Response } from 'express';
 
+const NEW_TODO = "newTodo";
 
 const viewListHandler = async (req: Request, res: Response, next: NextFunction) => {
     const { id, op } = req.query;
 
     try {
-
         const todoes = await todoService.find();
         const total = await todoService.count();
+        const newTodo = req.cookies[NEW_TODO];
+
         res.render('home', {
             todoes,
-            total
+            total,
+            newTodo
         });
     } catch (error) {
         console.log(error);
@@ -49,22 +52,33 @@ const addOrDetailHandler = async (req: Request, res: Response, next: NextFunctio
 const addTodoHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
 
-        const validation = CreateTodoSchema.safeParse(req.body);
+        const total = await todoService.count();
 
-        if (validation.success) {
-            let task = req.body.task;
-            await todoService.create(task);
-            res.redirect('/');
-        }else{
-            const errorValidations = validation.error.issues;
-            console.log(errorValidations);
+        if (total >= 20) {
             res.render('add', {
-                errorValidations
+                errorMaxData: "maxData"
             });
+        }else{
+            const validation = CreateTodoSchema.safeParse(req.body);
+
+            if (validation.success) {
+                let task = req.body.task;
+                const todo = await todoService.create(task);
+                res.cookie(NEW_TODO, todo, { maxAge: 3000, httpOnly: true })
+                res.redirect('/');
+            } else {
+                const errorValidations = validation.error.issues;
+                res.render('add', {
+                    errorValidations
+                });
+            }
         }
-        
+
     } catch (error) {
-        next(error);
+        console.log(error);
+        res.render('add', {
+            error
+        });
     }
 }
 
@@ -100,7 +114,7 @@ const router = express.Router();
 
 router.get('/', viewListHandler);
 router.get('/:addOrDetail', addOrDetailHandler);
-router.post('/', addTodoHandler);
+router.post('/add', addTodoHandler);
 router.put('/:id', updateTodoHandler);
 router.delete('/:id', deleteTodoHandler);
 

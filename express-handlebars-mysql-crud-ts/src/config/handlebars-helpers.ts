@@ -1,4 +1,11 @@
+import i18n from 'i18n';
+import { APP_NAME } from './env-constant';
+
 export const helpers = {
+
+    appName : function (){
+        return APP_NAME;
+    },
 
     inc: function (value: string) {
         return parseInt(value) + 1;
@@ -27,7 +34,7 @@ export const helpers = {
         if (arguments.length < 3) {
             return "handlebars Helper {{clazz}} expects 3 arguments";
         }
-        
+
         return arg2 ? arg1 : '';
     },
 
@@ -56,9 +63,17 @@ export const helpers = {
 
         if (arg1 === arg2) {
             return options.fn(this);
-        }else{
+        } else {
             return options.inverse(this);
         }
+    },
+
+    t: function () {
+        return i18n.__.apply(this, arguments as any);
+    },
+
+    tn: function () {
+        return i18n.__n.apply(this, arguments as any);
     }
 
 }

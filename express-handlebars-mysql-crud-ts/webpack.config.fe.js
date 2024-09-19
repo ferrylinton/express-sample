@@ -1,11 +1,13 @@
 const path = require("path");
+const fs = require('fs');
 const HtmlBundlerPlugin = require("html-bundler-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-
 
 module.exports = (_env, argv) => {
 
     const isProduction = argv.mode === "production";
+    let cssFilename = null;
+    let jsFilename = null;
 
     return {
 
@@ -61,11 +63,43 @@ module.exports = (_env, argv) => {
             new HtmlBundlerPlugin({
                 entry: "src",
                 js: {
-                    filename: "[name].[contenthash:8].js",
+                    filename: isProduction ? "[name].[contenthash:8].js" : (({ hash, chunk }) => {
+                        const newJsFilename = `${chunk.name}.${hash.slice(0, 8)}.js`;
+
+                        try {
+                            if (jsFilename && jsFilename !== newJsFilename) {
+                                fs.unlinkSync(path.resolve(__dirname, "dist", "assets", "js", jsFilename));
+                            } else if (!jsFilename) {
+                                fs.rmSync(path.resolve(__dirname, "dist", "assets", "js"), { recursive: true, force: true });
+                            }
+                        } catch (error) {
+                            console.log(error);
+                        }
+
+
+                        jsFilename = newJsFilename;
+                        return jsFilename;
+                    }),
                     outputPath: "assets/js/",
                 },
                 css: {
-                    filename: "[name].[contenthash:8].css",
+                    filename: isProduction ? "[name].[contenthash:8].css" : (({ contentHash, chunk }) => {
+                        const newCssFilename = `${chunk.name}.${contentHash.slice(0, 8)}.css`;
+
+                        try {
+                            if (cssFilename && cssFilename !== newCssFilename) {
+                                fs.unlinkSync(path.resolve(__dirname, "dist", "assets", "css", cssFilename));
+                            } else if (!cssFilename) {
+                                fs.rmSync(path.resolve(__dirname, "dist", "assets", "css"), { recursive: true, force: true });
+                            }
+                        } catch (error) {
+                            console.log(error);
+                        }
+
+                        cssFilename = newCssFilename;
+                        return cssFilename;
+                    }),
+                    
                     outputPath: "assets/css/"
                 },
                 preprocessor: false,

@@ -4,32 +4,32 @@
         <table>
             <tbody>
                 <tr>
-                    <th>ID</th>
+                    <th>{{t "id"}}</th>
                     <td>{{todo.id}}</td>
                 </tr>
                 <tr>
-                    <th>Task</th>
-                    <td>{{todo.task}}</td>
+                    <th>{{t "task"}}</th>
+                    <td class="break">{{todo.task}}</td>
                 </tr>
                 <tr>
-                    <th>Done</th>
-                    <td>{{todo.done}}</td>
+                    <th>{{t "done"}}</th>
+                    <td>{{#if todo.done}} {{t "yes"}} {{else}} {{t "no"}} {{/if}}</td>
                 </tr>
                 <tr>
-                    <th>Created At</th>
-                    <td data-convertToDate>{{todo.created_at}}</td>
+                    <th>{{t "createdAt"}}</th>
+                    <td data-convertToDate="{{todo.created_at}}"></td>
                 </tr>
                 <tr>
-                    <th>Updated At</th>
-                    <td data-convertToDate>{{todo.updated_at}}</td>
+                    <th>{{t "updatedAt"}}</th>
+                    <td data-convertToDate="{{todo.updated_at}}"></td>
                 </tr>
             </tbody>
         </table>
     </div>
     {{/if}}
     <section class="buttons">
-        <a href="/" class="btn btn-secondary">Back</a>
-        <button type="button" class="btn btn-danger" data-delete="{{todo.id}}">Delete</button>
+        <a href="/" class="btn btn-secondary">{{t "back"}}</a>
+        <button type="button" class="btn btn-danger" data-delete="{{todo.id}}">{{t "delete"}}</button>
     </section>
 </div>
-{{> confirm confirmMessage="Delete task?"}}
+{{> confirm confirmMessage="deleteData"}}

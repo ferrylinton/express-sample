@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -7,6 +6,8 @@
 @import './normalize.css';
 @import './variable.css';
 @import './sidebar.css';
+@import './dropdown.css';
+@import './toggle-theme-classic.css';
 @import './todo.css';
 
 body {
@@ -16,10 +17,12 @@ body {
     min-width: 350px;
     display: flex;
     flex-direction: row;
-    color: var(--primary-text);
+    background-color: var(--background);
+    color: var(--text);
 }
 
-/* Works on Firefox */
+/* Window's Scrollbar */
+
 * {
     scrollbar-width: thin;
     scrollbar-color: var(--scrollbar) var(--scrollbar-track);
@@ -40,9 +43,14 @@ body {
 }
 
 ::placeholder {
-    color: rgb(224, 224, 224);
+    color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 20%));
     opacity: 1;
 }
+
+.dark ::placeholder {
+    color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 20%));
+}
+
 
 a {
     text-decoration: none;
@@ -50,10 +58,6 @@ a {
 
 svg {
     fill: currentColor;
-}
-
-.text-secondary {
-    color: hsla(var(--base-h), var(--base-s), 40%, 1);
 }
 
 .main {
@@ -65,15 +69,29 @@ svg {
     gap: 1.5rem;
 }
 
+/* Navbar */
+
 .nav {
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    background-color: var(--background);
+    border-bottom: solid 1px hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 12% ));
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+}
+
+.dark .nav{
+    border-bottom: solid 1px hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 12% ));
+}
+
+.nav-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     height: 50px;
     width: 100%;
-    border-bottom: solid 1px var(--border-color);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+    max-width: 768px;
 }
 
 .logo {
@@ -82,12 +100,12 @@ svg {
     font-style: normal;
     line-height: 1;
     font-size: 2rem;
+    margin: 0 1rem;
 }
 
+/* Toggle Menu */
+
 .toggle-menu {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 50px;
     height: 50px;
     border: none;
@@ -97,6 +115,16 @@ svg {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: transparent;
+    margin: 0 0.5rem;
+}
+
+.toggle-menu:hover{
+    background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 8% ));
+}
+
+.dark .toggle-menu:hover{
+    background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 8% ));
 }
 
 .toggle-menu span {
@@ -104,8 +132,8 @@ svg {
     height: 0.15rem;
     display: block;
     border-radius: 10px;
-    transition: all 0.5s ease-in-out;
-    background-color: var(--primary-text);
+    transition: transform 0.5s ease-in-out;
+    background-color: var(--text);
 }
 
 .showSidebar .toggle-menu span:nth-child(1) {
@@ -123,6 +151,7 @@ svg {
 .container {
     height: 100%;
     width: 100%;
+    max-width: 768px;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -131,6 +160,8 @@ svg {
     align-items: center;
 }
 
+/** Button **/
+
 .btn {
     display: inline-block;
     text-align: center;
@@ -138,22 +169,40 @@ svg {
     font-size: 1rem;
     padding: 0.4rem;
     border-radius: 0.2rem;
-    color: var(--text);
+    color: var(--inverse-text)
 }
 
 .btn-primary {
+    color: hsl(var(--primary-h), var(--primary-s), 90%);
     background-color: var(--primary);
     box-shadow: var(--primary) 0 5px 10px -5px;
 }
 
+.btn-primary:hover{
+    color: var(--inverse-text);
+    background-color: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - 10%));
+}
+
 .btn-secondary {
-    background-color: var(--secondary);
-    box-shadow: var(--secondary) 0 5px 10px -5px;
+    color: hsl(var(--background-h), var(--background-s), 90%);
+    background-color: hsl(var(--background-h), var(--background-s), 40%);
+    box-shadow: hsl(var(--background-h), var(--background-s), 40%) 0 5px 10px -5px;
+}
+
+.btn-secondary:hover{
+    color: var(--inverse-text);
+    background-color: hsl(var(--background-h), var(--background-s), 30%);
 }
 
 .btn-danger {
+    color: hsl(var(--danger-h), var(--danger-s), 90%);
     background-color: var(--danger);
     box-shadow: var(--danger) 0 5px 10px -5px;
+}
+
+.btn-danger:hover{
+    color: var(--inverse-text);
+    background-color: hsl(var(--danger-h), var(--danger-s), calc(var(--danger-l) - 10%));
 }
 
 .btn svg {
@@ -161,11 +210,22 @@ svg {
     height: 20px;
 }
 
+/** Alert **/
+
 .alert {
+    display: inline-block;
+    width: calc(100% - 2rem);
+    max-width: 768px;
     margin: 1rem;
     padding: 1rem 2rem;
-    color: var(--text);
+    color: var(--inverse-text);
     border-radius: 0.2rem;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: var(--accent);
+    box-shadow: var(--accent) 0 5px 10px -5px;
 }
 
 .alert-danger {
@@ -173,9 +233,11 @@ svg {
     box-shadow: var(--danger) 0 5px 10px -5px;
 }
 
+/* Confirm */
+
 .confirm {
     display: none;
-    z-index: 150;
+    z-index: 900;
     width: 100%;
     height: 100dvh;
     position: fixed;
@@ -183,7 +245,8 @@ svg {
     left: 0;
     justify-content: center;
     align-items: center;
-    background-color: hsla(0, 0%, 0%, 0.6);
+    background-color: hsla(0, 0%, 0%, 0.5);
+    backdrop-filter: blur(2px);
 }
 
 .confirm.show {
@@ -193,10 +256,14 @@ svg {
 .confirm-content {
     width: 400px;
     height: 200px;
-    background-color: #fff;
+    background-color: var(--background);
     border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
+}
+
+.dark .confirm-content {
+    background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 10%));
 }
 
 .confirm .btn {
@@ -227,9 +294,6 @@ svg {
         display: none;
     }
 
-    .container {
-        max-width: 650px;
-    }
 }
 
 .footer {
@@ -240,5 +304,5 @@ svg {
 }
 
 .footer a {
-    color: var(--text-color);
+    color: var(--text);
 }

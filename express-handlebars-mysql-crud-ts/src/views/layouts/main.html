@@ -8,21 +8,53 @@
     <link href="@src/assets/css/index.css" rel="stylesheet" />
 </head>
 
-<body>
+<body class="{{theme}}">
     {{> sidebar}}
     <main class="main">
         <nav class="nav">
-            <button class="sidebar-open toggle-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <div class="logo">TODO LIST</div>
+            <div class="nav-content">
+                <button class="sidebar-open toggle-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="logo"><a href="/">{{appName}}</a></div>
+                <div style="display: flex; justify-content: center; align-items: center; margin: 0 0.5rem;">
+                    <label class="dropdown">
+                        <div class="dd-button">
+                            {{#if (eq locale "id")}}
+                            {{> indonesia-flag}}
+                            {{else}}
+                            {{> english-flag}}
+                            {{/if}}
+
+                            <div class="dd-button-arrow"></div>
+                        </div>
+                        <input type="checkbox" class="dd-input" id="test">
+                        <ul class="dd-menu">
+                            <li>
+                                <a href="?lang=en">
+                                    {{> english-flag}}
+                                    <span>English</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="?lang=id">
+                                    {{> indonesia-flag}}
+                                    <span>Indonesia</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </label>
+                    {{> toggle-theme}}
+                </div>
+            </div>
         </nav>
         <div class="main-content">
             {{#if error}}
             <div class="alert alert-danger">
-                {{error.message}}{{id}} {{op}}
+                {{error.message}}
             </div>
             {{/if}}
             {{{body}}}

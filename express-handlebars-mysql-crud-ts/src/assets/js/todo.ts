@@ -17,7 +17,7 @@ export class Todo {
         // convert date
         this.todoTaskDates = document.querySelectorAll('[data-convertToDate]');
         for (let i = 0; i < this.todoTaskDates.length; i++) {
-            const str = this.todoTaskDates[i].textContent;
+            const str = this.todoTaskDates[i].getAttribute("data-convertToDate");
             if (str) {
                 this.todoTaskDates[i].textContent = format(new Date(str), 'dd-LL-yyyy');
             } else {

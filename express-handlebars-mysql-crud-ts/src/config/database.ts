@@ -1,12 +1,12 @@
 import mysql from 'mysql2/promise';
 import * as env from "@src/config/env-constant";
-import { Pool } from 'mysql2/typings/mysql/lib/Pool';
 
 const pool = mysql.createPool({
   host: env.DB_HOST,
   user: env.DB_USER,
   password: env.DB_PASSWORD,
   database: env.DB_DB,
+  port: env.DB_PORT,
   waitForConnections: true,
   connectionLimit: 10,
   maxIdle: 10, // max idle connections, the default value is the same as `connectionLimit`

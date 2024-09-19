@@ -10,7 +10,7 @@
     visibility: hidden;
     opacity: 0;
     background-color: var(--primary);
-    color: var(--text);
+    color: var(--inverse-text);
 }
 
 .showSidebar .sidebar {
@@ -40,10 +40,16 @@
     top: 0;
     right: 0;
     left: auto;
+    margin: 0.5rem;
+    border-radius: 50%;
+}
+
+.sidebar-close.toggle-menu:hover {
+    background-color: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - 6% ));
 }
 
 .sidebar-close.toggle-menu span {
-    background-color: var(--text);
+    background-color: var(--inverse-text);
 }
 
 .sidebar-content {
@@ -61,14 +67,14 @@
     width: 200px;
     height: 200px;
     border-radius: 200px;
-    border: solid 3px hsla(var(--base-h), var(--base-s), 100%, 1);
-    box-shadow: 0 0 20px 0 hsla(var(--base-h), var(--base-s), 70%, 1);
+    border: solid 3px hsla(var(--inverse-text-h), var(--inverse-text-s), 100%, 1);
+    box-shadow: 0 0 20px 0 hsla(var(--inverse-text-h), var(--inverse-text-s), 70%, 1);
 }
 
 .author-message {
     margin-top: 1rem;
     font-size: 1rem;
-    color: var(--primary-lighter);
+    color: hsl(var(--primary-h), var(--primary-s), 90%, 1);
 }
 
 .author-name {
@@ -76,7 +82,7 @@
     font-size: 2rem;
     color: var(--accent);
     line-height: 1;
-    text-shadow: 1px 1px 1px hsla(var(--base-h), var(--base-s), 0%, 1);
+    text-shadow: 1px 1px 1px hsla(var(--inverse-text-h), var(--inverse-text-s), 0%, 1);
 }
 
 .author-title {

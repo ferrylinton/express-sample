@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = (_env, argv) => {
 
@@ -16,7 +17,7 @@ module.exports = (_env, argv) => {
         },
 
         watchOptions: {
-            ignored: ["**/assets", "**/views", "**/node_modules"],
+            ignored: ["**/views", "**/node_modules"],
         },
 
         resolve: {
@@ -36,11 +37,19 @@ module.exports = (_env, argv) => {
                     test: /\.ts?$/,
                     use: ["ts-loader"],
                     exclude: /node_modules/,
-                },
+                }
             ],
         },
 
         plugins: [
+            new CopyPlugin({
+                patterns: [
+                    { 
+                        from: path.resolve(__dirname, "src", "locales"), 
+                        to: path.resolve(__dirname, "dist", "locales")
+                    },
+                ],
+            }),
             new webpack.ContextReplacementPlugin(/express/)
         ],
 
