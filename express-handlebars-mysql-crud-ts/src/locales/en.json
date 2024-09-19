@@ -1,15 +1,21 @@
 {
     "home": "Home",
-    "total": "Number of data : %s",
+    "total": "Total : %s",
     "newTask": "New Task",
-
-    "code.required": "Code is required",
-    "code.string": "Code must be a string",
-    "code.min.3": "Code must be 3 or more characters long",
-    "code.max.5": "Code must be 5 or fewer characters long",
-
-    "description.required": "Description is required",
-    "description.string": "Description must be a string",
-    "description.min.10": "Description must be 10 or more characters long",
-    "description.max.100": "Description must be 100 or fewer characters long"
+    "dataIsSaved": "Data is saved",
+    "noRecords": "No records is found",
+    "updateData": "Update data?",
+    "id": "ID",
+    "task": "Task",
+    "done": "Done",
+    "yes": "Yes",
+    "no": "No",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "back": "Back",
+    "delete": "Delete",
+    "deleteData": "Delete data?",
+    "errorMaxData": "The amount has exceeded the quota, delete the data before adding new data",
+    "taskMin": "Task must be at least 3 characters long",
+    "taskMax": "Task must be a maximum of 150 characters"
 }
