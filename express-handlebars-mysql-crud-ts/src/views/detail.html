@@ -26,10 +26,16 @@
             </tbody>
         </table>
     </div>
+    {{else}}
+    <div class="alert alert-danger">
+        {{t "dataIsNotFound"}}
+    </div>
     {{/if}}
     <section class="buttons">
         <a href="/" class="btn btn-secondary">{{t "back"}}</a>
+        {{#if todo}}
         <button type="button" class="btn btn-danger" data-delete="{{todo.id}}">{{t "delete"}}</button>
+        {{/if}}
     </section>
 </div>
 {{> confirm confirmMessage="deleteData"}}

@@ -1,8 +1,7 @@
 {
     "home": "Home",
-    "total": "Total : %s",
+    "total": "Total : %s (max 20)",
     "newTask": "New Task",
-    "dataIsSaved": "Data is saved",
     "noRecords": "No records is found",
     "updateData": "Update data?",
     "id": "ID",
@@ -10,6 +9,9 @@
     "done": "Done",
     "yes": "Yes",
     "no": "No",
+    "cancel": "Cancel",
+    "ok": "OK",
+    "save": "Save",
     "createdAt": "Created At",
     "updatedAt": "Updated At",
     "back": "Back",
@@ -17,5 +19,11 @@
     "deleteData": "Delete data?",
     "errorMaxData": "The amount has exceeded the quota, delete the data before adding new data",
     "taskMin": "Task must be at least 3 characters long",
-    "taskMax": "Task must be a maximum of 150 characters"
+    "taskMax": "Task must be a maximum of 150 characters",
+    "dataIsSaved": "Data [%s] is saved",
+    "dataIsDeleted": "Data [%s] is deleted",
+    "dataIsUpdated": "Data [%s] is updated",
+    "pageIsNotFound": "Page is not found",
+    "internalServerError": "Internal Server Error",
+    "dataIsNotFound": "Data is not found"
 }

@@ -35,10 +35,10 @@
 
 .dark{
 
-    --background: hsl(0, 0%, 13%);
+    --background: hsl(0, 0%, 20%);
     --background-h: 0;
     --background-s: 0%;
-    --background-l: 13%;
+    --background-l: 20%;
 
     --text: hsl(0, 0%, 93%);
     --text-h: 0;

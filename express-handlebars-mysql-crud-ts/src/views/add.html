@@ -1,9 +1,9 @@
 <div class="container">
     {{#if errorValidations}}
-    <div class="alert alert-danger">
+    <div class="alert alert-danger" style="margin-bottom: 3rem">
         <ul>
             {{#each errorValidations}}
-            <li>{{t this.path.[0]}} : {{t this.message}}</li>
+            <li>{{tl message ../locale}}</li>
             {{/each}}
         </ul>
     </div>
@@ -13,7 +13,12 @@
        {{t errorMaxData}}
     </div>
     {{/if}}
-    <form method="post" action="/add" autocomplete="off" class="todo-form">
+    {{#if error}}
+    <div class="alert alert-danger">
+        {{error.message}}
+    </div>
+    {{/if}}
+    <form method="post" action="/todo/add" autocomplete="off" class="todo-form">
         <div class="form-group">
             <label>{{t "task"}}</label>
             <input name="task" type="text" autocomplete="off" maxlength="100" placeholder='{{t "task"}}' autofocus />

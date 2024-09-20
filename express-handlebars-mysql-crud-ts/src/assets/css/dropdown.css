@@ -23,12 +23,12 @@
     white-space: nowrap;
 }
 
-.dd-button:hover{ 
+.dd-button:hover, .dd-button+.dd-input:checked{ 
     background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 8% ));
 }
 
 .dark .dd-button:hover{ 
-    background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 8% ));
+    background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 8% ));
 }
 
 .dd-button-arrow {
@@ -64,12 +64,13 @@
     padding: 0.5rem 0;
     margin: 2px 0 0 0;
     list-style-type: none;
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 25px 50px -12px;
+    box-shadow: rgba(0, 0, 0, 0.7) 0px 25px 50px -12px;
     background-color: var(--background);
-    border: solid 1px hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 12% ));
+    border: solid 1px hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 20% ));
 }
 
 .dark .dd-menu{
+    box-shadow: rgba(0, 0, 0, 1) 0px 25px 50px -12px;
     border: solid 1px hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 12% ));
 }
 
@@ -102,5 +103,5 @@
 }
 
 .dark .dd-menu li a:hover {
-    background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 5%));
+    background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 5%));
 }

@@ -1,8 +1,7 @@
 {
 	"home": "Beranda",
-	"total": "Total : %s",
+	"total": "Total : %s (maks 20)",
 	"newTask" : "Tugas Baru",
-	"dataIsSaved": "Data disimpan",
     "noRecords": "Data tidak ditemukan",
     "updateData": "Ubah data?",
     "id": "ID",
@@ -10,6 +9,9 @@
     "done": "Selesai",
     "yes": "Ya",
     "no": "Tidak",
+    "cancel": "Batal",
+    "ok": "OK",
+	"save": "Simpan",
     "createdAt": "Tgl Dibuat",
     "updatedAt": "Tgl Diubah",
     "back": "Kembali",
@@ -17,5 +19,11 @@
     "deleteData": "Hapus data?",
     "errorMaxData": "Jumlah sudah melebihi kuota, hapus data sebelum menambah data baru",
 	"taskMin": "Tugas harus minimal 3 karakter",
-    "taskMax": "Tugas harus maksimal 150 karakter"
+    "taskMax": "Tugas harus maksimal 150 karakter",
+	"dataIsSaved": "Data [%s] disimpan",
+	"dataIsDeleted": "Data [%s] sudah dihapus",
+    "dataIsUpdated": "Data [%s] sudah diubah",
+    "pageIsNotFound": "Halaman tidak ditemukan",
+    "internalServerError": "Terjadi kesalahan di server",
+    "dataIsNotFound": "Data tidak ditemukan"
 }

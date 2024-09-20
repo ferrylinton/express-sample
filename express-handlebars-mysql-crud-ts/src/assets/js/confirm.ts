@@ -8,14 +8,12 @@ export const confirm = () => {
 
         if (cancelButton) {
             cancelButton.addEventListener('click', async (event: Event) => {
-                console.log("cancelllllll");
                 return resolve(false);
             });
         }
 
         if (okButton) {
             okButton.addEventListener('click', async (event: Event) => {
-                console.log("okkkkkk");
                 return resolve(true);
             });
         }

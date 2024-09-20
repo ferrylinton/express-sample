@@ -18,7 +18,7 @@
 
 .todo-list-toolbar .total {
     line-height: 1;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: lighter;
 }
 
@@ -41,6 +41,7 @@
 .dark .todo-detail {
     --border-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 15%));
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+    text-shadow: 1px 1px hsl(0, 0%, 5%);
 }
 
 .todo-list table,

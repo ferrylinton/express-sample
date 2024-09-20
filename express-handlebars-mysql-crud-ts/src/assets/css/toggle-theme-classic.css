@@ -53,7 +53,7 @@
 
 .theme-toggle:hover{ 
     color: hsl(var(--text-h), var(--text-s), calc(var(--text-l) + 10% ));
-    background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 6% ));
+    background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 8% ));
 }
 
 .dark .theme-toggle{
@@ -63,7 +63,7 @@
 
 .dark .theme-toggle:hover{ 
     color: hsl(var(--text-h), var(--text-s), calc(var(--text-l) - 5% ));
-    background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 6% ));
+    background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 8% ));
 }
 
 .theme-toggle svg{

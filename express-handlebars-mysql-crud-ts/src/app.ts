@@ -9,8 +9,10 @@ import cookieParser from 'cookie-parser';
 import homeRouter from '@src/routers/home-router';
 import { helpers } from '@src/config/handlebars-helpers';
 import { COOKIE_LOCALE, COOKIE_THEME, DEFAULT_LOCALE, LOCALES } from '@src/config/env-constant';
+import error2json from "@stdlib/error-to-json";
 
 const VIEWS_FOLDER = path.join(__dirname, 'views');
+const COOKIE_MAX_AGE = 30 * 24 * 60 * 60 * 1000;
 
 i18n.configure({
     locales: LOCALES,
@@ -60,22 +62,22 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
 
-    if(req.query.theme){
+    if (req.query.theme) {
         let theme = req.query.theme === "dark" ? "dark" : "light";
-        res.cookie(COOKIE_THEME, theme, { signed: true, secure: true, maxAge: 900000, httpOnly: true });
+        res.cookie(COOKIE_THEME, theme, { signed: true, secure: true, maxAge: COOKIE_MAX_AGE, httpOnly: true });
         res.locals.theme = theme;
-    }else if(req.signedCookies[COOKIE_THEME]){
+    } else if (req.signedCookies[COOKIE_THEME]) {
         res.locals.theme = req.signedCookies[COOKIE_THEME] === "dark" ? "dark" : "light";
-    }else{
+    } else {
         let theme = "light";
-        res.cookie(COOKIE_THEME, theme, { signed: true, secure: true, maxAge: 900000, httpOnly: true });
+        res.cookie(COOKIE_THEME, theme, { signed: true, secure: true, maxAge: COOKIE_MAX_AGE, httpOnly: true });
         res.locals.theme = theme;
     }
 
-    if(req.query.lang && LOCALES.includes(req.query.lang as string)){
-        res.cookie(COOKIE_LOCALE, req.query.lang, { maxAge: 900000, httpOnly: true })
-    } else if(!req.cookies[COOKIE_LOCALE]){
-        res.cookie(COOKIE_LOCALE, DEFAULT_LOCALE, { maxAge: 900000, httpOnly: true })
+    if (req.query.lang && LOCALES.includes(req.query.lang as string)) {
+        res.cookie(COOKIE_LOCALE, req.query.lang, { maxAge: COOKIE_MAX_AGE, httpOnly: true })
+    } else if (!req.cookies[COOKIE_LOCALE]) {
+        res.cookie(COOKIE_LOCALE, DEFAULT_LOCALE, { maxAge: COOKIE_MAX_AGE, httpOnly: true })
     }
 
     next()
@@ -86,13 +88,21 @@ app.use('/', homeRouter);
 
 // 404 / not found handler
 app.use((_req: Request, res: Response, _next: NextFunction) => {
-    res.status(404).json({ message: "Not Found" })
+    res.render('404');
 })
 
 // error handler
-app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    res.status(err.status || 500);
-    return res.json({ message: err.message || 'Internal Server Error' })
+app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
+    console.error(err);
+
+    if(req.path.includes("/api/")){
+        res.status(500).json({ error: error2json(err) });
+    }else{
+        res.render('error', {
+            error: error2json(err)
+        });
+    }
+    
 })
 
 export default app;

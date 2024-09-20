@@ -74,6 +74,10 @@ export const helpers = {
 
     tn: function () {
         return i18n.__n.apply(this, arguments as any);
+    },
+
+    tl: function (phrase: string, locale: string) {
+        return i18n.__({phrase, locale});
     }
 
 }

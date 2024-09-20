@@ -70,7 +70,7 @@ export class Todo {
 
     static async remove(id: string) {
         try {
-            await apiClient.delete(`/${id}`);
+            await apiClient.delete(`/api/todo/${id}`);
             window.location.replace('/');
         } catch (error) {
             console.log(error);
@@ -79,7 +79,7 @@ export class Todo {
 
     static async update(id: string) {
         try {
-            await apiClient.put(`/${id}`);
+            await apiClient.put(`/api/todo/${id}`);
             window.location.replace('/');
         } catch (error) {
             console.log(error);

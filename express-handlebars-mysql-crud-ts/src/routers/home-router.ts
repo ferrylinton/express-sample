@@ -3,68 +3,65 @@ import { CreateTodoSchema } from '@src/validations/TodoSchema';
 import express, { NextFunction, Request, Response } from 'express';
 
 const NEW_TODO = "newTodo";
+const MESSAGE = "message";
 
 const viewListHandler = async (req: Request, res: Response, next: NextFunction) => {
-    const { id, op } = req.query;
-
     try {
         const todoes = await todoService.find();
         const total = await todoService.count();
         const newTodo = req.cookies[NEW_TODO];
+        const message = req.cookies[MESSAGE];
+
+        res.cookie(NEW_TODO, '', { expires: new Date(0) });
+        res.cookie(MESSAGE, '', { expires: new Date(0) });
 
         res.render('home', {
             todoes,
             total,
+            message,
             newTodo
         });
     } catch (error) {
-        console.log(error);
-        res.render('home', {
-            error,
-            id,
-            op
-        });
+        next(error);
     }
 }
 
-const addOrDetailHandler = async (req: Request, res: Response, next: NextFunction) => {
-    let id: string = req.params.addOrDetail;
-    let view: string = id === "add" ? "add" : "detail";
-    let options = undefined;
-
+const viewDetailHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        if (id !== "add") {
-            const todo = await todoService.findById(id);
-            options = {
-                todo
-            }
-        }
+        const id: string = req.params.id;
+        const todo = await todoService.findById(id);
+        res.render("detail", {
+            todo
+        });
     } catch (error) {
-        console.log(error);
-        options = {
-            error
-        }
+        next(error);
     }
+}
 
-    res.render(view, options);
+const viewAddFormHandler = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        res.render("add");
+    } catch (error) {
+        next(error);
+    }
 }
 
 const addTodoHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
-
         const total = await todoService.count();
 
         if (total >= 20) {
             res.render('add', {
                 errorMaxData: "maxData"
             });
-        }else{
+        } else {
             const validation = CreateTodoSchema.safeParse(req.body);
 
             if (validation.success) {
                 let task = req.body.task;
                 const todo = await todoService.create(task);
-                res.cookie(NEW_TODO, todo, { maxAge: 3000, httpOnly: true })
+                res.cookie(MESSAGE, res.__("dataIsSaved", task), { maxAge: 3000, httpOnly: true });
+                res.cookie(NEW_TODO, todo, { maxAge: 3000, httpOnly: true });
                 res.redirect('/');
             } else {
                 const errorValidations = validation.error.issues;
@@ -75,7 +72,6 @@ const addTodoHandler = async (req: Request, res: Response, next: NextFunction) =
         }
 
     } catch (error) {
-        console.log(error);
         res.render('add', {
             error
         });
@@ -86,8 +82,10 @@ const updateTodoHandler = async (req: Request, res: Response, next: NextFunction
     try {
         const id: string = req.params.id;
         const current = await todoService.findById(id);
+
         if (current) {
-            await todoService.update(id, { task: current.task, done: true })
+            await todoService.update(id, { task: current.task, done: true });
+            res.cookie(MESSAGE, res.__("dataIsUpdated", current.task), { maxAge: 3000, httpOnly: true });
         }
 
         res.status(200).json({ message: "OK" });
@@ -99,7 +97,13 @@ const updateTodoHandler = async (req: Request, res: Response, next: NextFunction
 const deleteTodoHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id: string = req.params.id;
-        await todoService.deleteById(id)
+        const current = await todoService.findById(id);
+
+        if (current) {
+            await todoService.deleteById(id);
+            res.cookie(MESSAGE, res.__("dataIsDeleted", current.task), { maxAge: 3000, httpOnly: true });
+        }
+
         res.status(200).json({ message: "OK" });
     } catch (error) {
         next(error);
@@ -113,9 +117,10 @@ const deleteTodoHandler = async (req: Request, res: Response, next: NextFunction
 const router = express.Router();
 
 router.get('/', viewListHandler);
-router.get('/:addOrDetail', addOrDetailHandler);
-router.post('/add', addTodoHandler);
-router.put('/:id', updateTodoHandler);
-router.delete('/:id', deleteTodoHandler);
+router.get('/todo/detail/:id', viewDetailHandler);
+router.get('/todo/add', viewAddFormHandler);
+router.post('/todo/add', addTodoHandler);
+router.put('/api/todo/:id', updateTodoHandler);
+router.delete('/api/todo/:id', deleteTodoHandler);
 
 export default router;
