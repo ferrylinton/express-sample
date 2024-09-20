@@ -25,5 +25,6 @@
     "dataIsUpdated": "Data [%s] is updated",
     "pageIsNotFound": "Page is not found",
     "internalServerError": "Internal Server Error",
-    "dataIsNotFound": "Data is not found"
+    "dataIsNotFound": "Data is not found",
+    "builtWith": "Built with"
 }

@@ -25,5 +25,6 @@
     "dataIsUpdated": "Data [%s] sudah diubah",
     "pageIsNotFound": "Halaman tidak ditemukan",
     "internalServerError": "Terjadi kesalahan di server",
-    "dataIsNotFound": "Data tidak ditemukan"
+    "dataIsNotFound": "Data tidak ditemukan",
+    "builtWith": "Dibangun dengan"
 }
