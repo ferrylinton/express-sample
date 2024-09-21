@@ -70,13 +70,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
+    padding: 1rem;
 }
 
 .author-image {
-    width: 200px;
-    height: 200px;
-    border-radius: 200px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
     border: solid 3px hsla(var(--inverse-text-h), var(--inverse-text-s), 100%, 1);
     box-shadow: 0 0 20px 0 hsla(var(--inverse-text-h), var(--inverse-text-s), 70%, 1);
 }
@@ -89,22 +90,23 @@
 
 .author-name {
     font-family: "Permanent Marker", cursive;
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: var(--accent);
     line-height: 1;
     text-shadow: 1px 1px 1px hsla(var(--inverse-text-h), var(--inverse-text-s), 0%, 1);
 }
 
 .author-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
+    text-shadow: 1px 1px 1px hsla(var(--inverse-text-h), var(--inverse-text-s), 0%, 1);
 }
 
 .author-info {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 0.5rem;
 }
 
 .author-info-item {

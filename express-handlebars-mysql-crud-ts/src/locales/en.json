@@ -26,5 +26,6 @@
     "pageIsNotFound": "Page is not found",
     "internalServerError": "Internal Server Error",
     "dataIsNotFound": "Data is not found",
-    "builtWith": "Built with"
+    "builtWith": "Built with",
+    "hi": "Hi I'm"
 }
