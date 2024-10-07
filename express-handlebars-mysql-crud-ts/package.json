@@ -9,7 +9,7 @@
     "serve": "cross-env NODE_ENV=development node ./dist/server.js",
     "build-be": "webpack --config ./webpack.config.be.js --mode=production",
     "build-fe": "webpack --config ./webpack.config.fe.js --mode=production",
-    "build": "npm run clean && npm run build-fe && npm run build-be",
+    "build": "npm run clean && concurrently 'npm:build-*'",
     "dev-be": "webpack --config ./webpack.config.be.js --watch --mode=development",
     "dev-fe": "webpack --config ./webpack.config.fe.js --watch --mode=development",
     "dev-serve": "nodemon",

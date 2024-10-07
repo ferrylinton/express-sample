@@ -1,0 +1,70 @@
+:root{
+    --background: hsl(0, 0%, 100%);
+    --background-h: 0;
+    --background-s: 0%;
+    --background-l: 100%;
+
+    --text: hsl(0, 0%, 13%);
+    --text-h: 0;
+    --text-s: 0%;
+    --text-l: 13%;
+
+    --primary: hsl(231, 48%, 48%);
+    --primary-h: 231;
+    --primary-s: 48%;
+    --primary-l: 48%;
+
+    --accent: hsl(88, 50%, 53%);
+    --accent-h: 88;
+    --accent-s: 50%;
+    --accent-l: 53%;
+
+    --danger: hsl(4, 90%, 58%);
+    --danger-h: 4;
+    --danger-s: 90%;
+    --danger-l: 58%;
+
+    --inverse-text: hsl(0, 0%, 100%);
+    --inverse-text-h: 0;
+    --inverse-text-s: 0%;
+    --inverse-text-l: 100%;
+
+    --scrollbar: hsla(var(--background-h), var(--background-s), 50%, 1);
+    --scrollbar-track: hsla(var(--background-h), var(--background-s), 90%, 1);
+}
+
+.dark{
+
+    --background: hsl(0, 0%, 20%);
+    --background-h: 0;
+    --background-s: 0%;
+    --background-l: 20%;
+
+    --text: hsl(0, 0%, 93%);
+    --text-h: 0;
+    --text-s: 0%;
+    --text-l: 93%;
+
+    --primary: hsl(211, 40%, 36%);
+    --primary-h: 211;
+    --primary-s: 40%;
+    --primary-l: 36%;
+
+    --accent: hsl(88, 50%, 53%);
+    --accent-h: 88;
+    --accent-s: 50%;
+    --accent-l: 53%;
+
+    --danger: hsl(6, 78%, 57%);
+    --danger-h: 6;
+    --danger-s: 78%;
+    --danger-l: 57%;
+
+    --inverse-text: hsl(0, 0%, 100%);
+    --inverse-text-h: 0;
+    --inverse-text-s: 0%;
+    --inverse-text-l: 100%;
+
+    --scrollbar: hsla(var(--background-h), var(--background-s), 50%, 1);
+    --scrollbar-track: hsla(var(--background-h), var(--background-s), 90%, 1);
+}

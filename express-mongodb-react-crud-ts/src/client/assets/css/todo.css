@@ -1,0 +1,194 @@
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: baseline;
+    align-items: center;
+}
+
+.todo-list-toolbar {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 0.5rem;
+    margin: 4rem 0 0.5rem 0;
+}
+
+.todo-list-toolbar .total {
+    line-height: 1;
+    font-size: 1rem;
+    font-weight: lighter;
+}
+
+.todo-list-toolbar .btn {
+    min-width: 130px;
+    font-size: 0.9rem;
+}
+
+.todo-list,
+.todo-detail {
+    --border-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 15%));
+    width: 100%;
+    border-radius: 0.5em;
+    border: solid 1px var(--border-color);
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+}
+
+.dark .todo-list,
+.dark .todo-detail {
+    --border-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 15%));
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+    text-shadow: 1px 1px hsl(0, 0%, 5%);
+}
+
+.todo-list table,
+.todo-detail table {
+    width: 100%;
+}
+
+.todo-list .task-done td span {
+    text-decoration: line-through;
+}
+
+.todo-list .task-done .action .btn-primary {
+    display: none;
+}
+
+.todo-list tr:not(:last-child),
+.todo-detail tr:not(:last-child) {
+    border-bottom: solid 1px var(--border-color);
+}
+
+.todo-list tr:nth-child(odd),
+.todo-detail tr:nth-child(odd) {
+    background-color: var(--background);
+}
+
+.todo-list tr:nth-child(even),
+.todo-detail tr:nth-child(even) {
+    background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 5%));
+}
+
+.dark .todo-list tr:nth-child(even),
+.dark .todo-detail tr:nth-child(even) {
+    background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 5%));
+}
+
+.todo-list tr td,
+.todo-detail tr td {
+    vertical-align: middle;
+}
+
+.todo-list tr td:nth-child(1) {
+    width: 50px;
+    text-align: center;
+}
+
+.todo-list tr td:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px 8px 8px 0;
+}
+
+.todo-list tr td em,
+.todo-list tr td span,
+.todo-detail .break {
+    line-height: 1;
+    word-break: break-all;
+}
+
+.todo-list tr td:nth-child(2) em {
+    font-size: .7rem;
+    color: var(--secondary);
+}
+
+.todo-list tr td:nth-child(3) {
+    width: 90px;
+}
+
+.todo-list .action {
+    padding-right: 1rem;
+    display: flex;
+    justify-content: end;
+    gap: 4px;
+}
+
+.todo-detail tr th {
+    width: 140px;
+    font-weight: bold;
+    text-align: right;
+    padding: 0.5rem;
+}
+
+.todo-detail tr td {
+    text-align: left;
+    padding: 0.5rem;
+}
+
+.todo-list tr.new-todo {
+    background-color: var(--accent);
+    color: var(--inverse-text);
+}
+
+.buttons {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    gap: 0.3rem;
+}
+
+.buttons .btn {
+    min-width: 100px;
+}
+
+.todo-form {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+.todo-form input[type="text"] {
+    font-size: 16px;
+    line-height: 28px;
+    padding: 8px 16px;
+    width: 100%;
+    min-height: 44px;
+    border-radius: 4px;
+    background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 5%));
+    border: solid 1px hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 15%));
+}
+
+.todo-form input[type="text"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px hsla(var(--accent-h), var(--accent-s), calc(var(--accent-l) + 15%), 0.5);
+}
+
+.dark .todo-form input[type="text"] {
+    background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 5%));
+    border: solid 1px hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 15%));
+}
+
+.dark .todo-form input[type="text"]:focus {
+    box-shadow: 0 0 0 3px hsla(var(--accent-h), var(--accent-s), calc(var(--accent-l) + 15%), 0.5);
+}
+
+.todo-form label {
+    padding: 0 0.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.todo-form .btn,
+.todo-detail .btn {
+    min-width: 100px;
+}
+
+.no-records {
+    padding: 1rem;
+}
