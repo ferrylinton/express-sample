@@ -1,17 +1,13 @@
-import { AppProvider } from '../providers/app-provider';
-import { PropsWithChildren } from 'react';
 import { Outlet } from 'react-router-dom';
-import { useAlertStore } from '../hooks/alert-store';
+import { AppProvider } from '../providers/app-provider';
+import { AlertMessageContainer } from './AlertMessageContainer';
 import { ConfirmDialog } from './ConfirmDialog';
 import { LocaleMenu } from './LocaleMenu';
 import { Sidebar } from './Sidebar';
 import { ToggleTheme } from './ToggleTheme';
-import clsx from 'clsx';
 
 
-export default function Layout({ children }: PropsWithChildren) {
-
-    const { show, message, alertType } = useAlertStore();
+export default function Layout() {
 
     const showSidebar = () => {
         document.body.classList.add('showSidebar');
@@ -39,11 +35,7 @@ export default function Layout({ children }: PropsWithChildren) {
                 <div className="main-content">
                     <div className="container">
                         <ConfirmDialog />
-                        <div className={clsx("alert",
-                            alertType === "danger" ? "alert-danger" : "alert-success",
-                            show && "show")}>
-                            <p>{message}</p>
-                        </div>
+                        <AlertMessageContainer />
                         <Outlet />
                     </div>
                 </div>

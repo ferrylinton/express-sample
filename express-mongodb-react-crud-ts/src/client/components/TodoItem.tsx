@@ -22,7 +22,6 @@ export const TodoItem = ({ index, todo }: Props) => {
 
     const onClickUpdate = () => {
         if (todo) {
-            hideAlert();
             showConfirm(intl.formatMessage({ id: "updateData" }), todo, false);
         }
     }

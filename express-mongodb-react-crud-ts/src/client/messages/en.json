@@ -27,5 +27,9 @@
     "internalServerError": "Internal Server Error",
     "dataIsNotFound": "Data is not found",
     "builtWith": "Built with",
-    "hi": "Hi, I'm"
+    "hi": "Hi, I'm",
+    "tooManyRequest": "Too many requests, please try again later",
+    "invalidToken": "Invalid token",
+    "noTokenProvided": "No token provided",
+    "invalidIp": "Token has invalid IP"
 }

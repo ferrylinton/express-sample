@@ -1,17 +1,22 @@
 import * as todoService from "../services/todo-service";
 import { Todo } from '../../types/todo-type';
 import { useEffect, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Link, useLocation } from 'react-router-dom';
 import { TodoItem } from '../components/TodoItem';
+import { useAlertStore } from "../hooks/alert-store";
 
 export const HomePage = () => {
+
+    const intl = useIntl();
 
     const location = useLocation();
 
     const [todoes, setTodoes] = useState<Todo[]>();
 
     const [total, setTotal] = useState<number>(0);
+
+    const {alert} = useAlertStore();
 
     const loadTodoes = () => {
         todoService.find()
@@ -22,8 +27,15 @@ export const HomePage = () => {
                         setTodoes(data.todoes);
                     }
                 }, 500);
-            }).catch(error => {
-                console.log(error);
+            }).catch(err => {
+                console.error(err);
+                const error = err as any;
+
+                if(error.response?.data?.code){
+                    alert.error(intl.formatMessage({id : error.response.data.code}))
+                }else{
+                    alert.error(error.message);
+                }
             });
     }
 

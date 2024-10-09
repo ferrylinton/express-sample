@@ -27,5 +27,9 @@
     "internalServerError": "Terjadi kesalahan di server",
     "dataIsNotFound": "Data tidak ditemukan",
     "builtWith": "Dibangun dengan",
-    "hi": "Horas, saya"
+    "hi": "Horas, saya",
+    "tooManyRequest": "Terlalu banyak permintaan, silakan dicoba beberapa saat lagi",
+    "invalidToken": "Token tidak valid",
+    "noTokenProvided": "Tidak ada token yang disediakan",
+    "invalidIp": "Token memiliki IP yang tidak valid"
 }

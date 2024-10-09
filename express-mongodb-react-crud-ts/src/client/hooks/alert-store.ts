@@ -1,44 +1,64 @@
-import { Todo } from '../../types/todo-type';
+import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
 
-type AlertType = "success" | "danger";
+export enum AlertType {
+    SUCCESS, ERROR
+};
 
-type AlertState = {
-    show: boolean,
+export type AlertItem = {
+    id: string,
     message: string,
-    alertType?: AlertType,
-    todo?: Todo,
-    showAlert: (message: string, alertType?: AlertType, todo?: Todo) => void,
-    hideAlert: () => void
+    alertType: AlertType
 }
 
-const DEFAULT_VALUE: Partial<AlertState> = {
-    show: false,
-    message: "",
-    alertType: "success",
-    todo: undefined
+type AlertState = {
+    alertList: AlertItem[]
+    alert: {
+        success: (message: string) => void,
+        error: (message: string) => void,
+    }
+    hideAlert: (id: string) => void
 }
 
 export const useAlertStore = create<AlertState>((set) => ({
-    show: false,
+    alertList: [],
 
-    message: "",
+    alert: {
+        success: (message: string) => {
 
-    alertType: "success",
+            set((state) => ({
+                alertList: [
+                    {
+                        id: uuidv4(),
+                        message,
+                        alertType: AlertType.SUCCESS
+                    },
+                    ...state.alertList,
+                ]
+            }));
 
-    todo: undefined,
+        },
 
-    showAlert: (message: string, alertType?: AlertType, todo?: Todo) => {
-        
-        set(() => ({ show: true, message, alertType, todo }));
+        error: (message: string) => {
 
-        setTimeout(() => {
-            set(() => (DEFAULT_VALUE));
-        }, 10000);
+            set((state) => ({
+                alertList: [
+                    ...state.alertList,
+                    {
+                        id: uuidv4(),
+                        message,
+                        alertType: AlertType.ERROR
+                    }
+                ]
+            }));
+
+        }
     },
 
-    hideAlert: () => {
-        set(() => (DEFAULT_VALUE));
+    hideAlert: (id: string) => {
+        set((state) => ({
+            alertList: state.alertList.filter((alertItem) => alertItem.id !== id),
+        }));
     }
 
 }));

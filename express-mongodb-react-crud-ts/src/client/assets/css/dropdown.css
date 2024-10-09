@@ -57,6 +57,7 @@
 }
 
 .dd-menu {
+    z-index: 200;
     position: absolute;
     top: calc(100% + 2px);
     right: 0;
@@ -94,7 +95,7 @@
     display: flex;
     gap: 10px;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     line-height: 1;
 }
 

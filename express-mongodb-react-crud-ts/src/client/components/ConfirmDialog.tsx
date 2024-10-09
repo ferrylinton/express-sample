@@ -11,7 +11,7 @@ export const ConfirmDialog = () => {
 
     const navigate = useNavigate();
 
-    const { showAlert } = useAlertStore();
+    const { alert } = useAlertStore();
 
     const { isDelete, message, todo, show, hideConfirm } = useConfirmStore();
 
@@ -19,10 +19,10 @@ export const ConfirmDialog = () => {
         try {
             if (isDelete) {
                 await todoService.deleteById(todo?.id as string);
-                showAlert(intl.formatMessage({ id: "dataIsDeleted" }, { task: todo?.task }) as string)
+                alert.success(intl.formatMessage({ id: "dataIsDeleted" }, { task: todo?.task }) as string)
             } else {
                 await todoService.update(todo?.id as string);
-                showAlert(intl.formatMessage({ id: "dataIsUpdated" }, { task: todo?.task }) as string)
+                alert.success(intl.formatMessage({ id: "dataIsUpdated" }, { task: todo?.task }) as string)
             }
 
             hideConfirm();
@@ -30,7 +30,7 @@ export const ConfirmDialog = () => {
         } catch (error: any) {
             console.log(error);
             hideConfirm();
-            showAlert(error.response.data.message, "danger");
+            alert.error(error.response.data.message);
         }
     }
 

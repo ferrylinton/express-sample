@@ -1,15 +1,18 @@
-import * as todoService from "../services/todo-service";
-import { Todo } from '../../types/todo-type';
 import { useEffect, useState } from 'react';
 import { FormattedDate, FormattedMessage, useIntl } from 'react-intl';
 import { Link, useParams } from 'react-router-dom';
+import { Todo } from '../../types/todo-type';
+import { useAlertStore } from "../hooks/alert-store";
 import { useConfirmStore } from '../hooks/confirm-store';
+import * as todoService from "../services/todo-service";
 
 export const DetailPage = () => {
 
   const intl = useIntl();
 
   const { showConfirm } = useConfirmStore();
+
+  const {alert} = useAlertStore();
 
   const { id } = useParams();
 
@@ -29,8 +32,15 @@ export const DetailPage = () => {
           }
         }, 500);
 
-      }).catch(error => {
-        console.log(error);
+      }).catch(err => {
+        console.error(err);
+        const error = err as any;
+
+        if (error.response?.data?.code) {
+          alert.error(intl.formatMessage({ id: error.response.data.code }))
+        } else {
+          alert.error(error.message);
+        }
       });
   }
 

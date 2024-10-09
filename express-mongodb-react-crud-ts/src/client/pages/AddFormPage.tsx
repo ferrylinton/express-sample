@@ -1,8 +1,8 @@
-import * as todoService from "../services/todo-service";
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAlertStore } from '../hooks/alert-store';
+import * as todoService from "../services/todo-service";
 
 export interface ErrorValidation {
   code: string
@@ -20,7 +20,7 @@ export const AddFormPage = () => {
 
   const navigate = useNavigate();
 
-  const { showAlert, hideAlert } = useAlertStore();
+  const { alert } = useAlertStore();
 
   const [task, setTask] = useState<string>('')
 
@@ -34,31 +34,33 @@ export const AddFormPage = () => {
     todoService.create(task)
       .then(({ status }) => {
         if (status === 201) {
-          showAlert(intl.formatMessage({ id: "dataIsSaved" }, { task }))
+          alert.success(intl.formatMessage({ id: "dataIsSaved" }, { task }))
           navigate("/", { replace: true });
         }
       }).catch((error: any) => {
-        console.log(error);
+        console.error(error);
 
         if (error.response?.data?.errorMaxData) {
-          showAlert(intl.formatMessage({ id: error.response.data.errorMaxData }), "danger");
+          alert.error(intl.formatMessage({ id: error.response.data.errorMaxData }));
         } else if (error.response?.data?.length > 0) {
+
           const errorValidations = error.response?.data as ErrorValidation[];
           if (errorValidations[0]) {
-            showAlert(intl.formatMessage({ id: errorValidations[0].message }), "danger");
+            alert.error(intl.formatMessage({ id: errorValidations[0].message }));
+          } else {
+            alert.error(error.message);
           }
+
+        } else if (error.response?.data?.code) {
+          alert.error(intl.formatMessage({ id: error.response.data.code }))
         } else {
-          showAlert(error.message, "danger");
+          alert.error(error.message);
         }
 
       });
 
     setTask('');
   };
-
-  useEffect(() => {
-    hideAlert();
-  }, [])
 
   return (
     <>

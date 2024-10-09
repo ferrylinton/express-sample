@@ -21,7 +21,19 @@
     "baseUrl": ".",
     "paths": {
       "@src/*": [
-        "./src/*"
+        "src/*"
+      ],
+      "@types/*": [
+        "src/types/*"
+      ],
+      "@services/*": [
+        "src/server/services/*"
+      ],
+      "@validations/*": [
+        "src/server/validations/*"
+      ],
+      "@utils/*": [
+        "src/server/utils/*"
       ]
     },
   },

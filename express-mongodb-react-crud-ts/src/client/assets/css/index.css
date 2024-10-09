@@ -227,31 +227,54 @@ svg {
 
 /** Alert **/
 
-.alert {
-    position: absolute;
-    top: 0;
-    display: inline-block;
-    width: calc(100% - 2rem);
-    max-width: 768px;
-    color: var(--inverse-text);
-    border-radius: 0.2rem;
-    transform: translateY(-70px);
-    transition: all .3s ease-in-out;
-    visibility: hidden;
-    opacity: 0;
+.alert-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
 }
 
-.alert.show{
-    visibility: visible;
-    opacity: 1;
-    transform: translateX(0) translateY(0);
-    animation: bounceInDown;
+.alert {
+    display: inline-block;
+    width: 100%;
+    color: var(--inverse-text);
+    border-radius: 0.2rem;
+    animation: fadeIn;
+    animation-duration: 2s;
+    animation-delay: 0s;
+    max-height: 100px;
+}
+
+.alert.close{
+    overflow: hidden;
+    transition: max-height 1s ease-in-out;
+    max-height: 0;
+    animation: fadeOut;
     animation-duration: 2s;
     animation-delay: 0s;
 }
 
 .alert p {
+    position: relative;
     padding: 1rem 1.5rem;
+}
+
+.alert-close{
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: lighter;
+    color: hsla(var(--inverse-text-h), var(--inverse-text-s), var(--inverse-text-l), 0.5);
+    cursor: pointer;
+}
+
+.alert-close:hover{
+    color: hsla(var(--inverse-text-h), var(--inverse-text-s), var(--inverse-text-l), 0.8);
 }
 
 .alert-success {
