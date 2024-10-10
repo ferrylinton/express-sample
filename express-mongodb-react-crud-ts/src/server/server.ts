@@ -1,12 +1,14 @@
 import app from '@src/server/app';
-
-const PORT = "3000";
+import { NODE_ENV, PORT } from './utils/env-constant';
+import logger from './utils/winston';
 
 /**
  * This function is called after the Express application runs
  */
 const callback = () => {
-    console.log(`[SERVER] Server is running at 'http://127.0.0.1:${PORT}'`);
+    console.error(`[SERVER] Server is running at 'http://127.0.0.1:${PORT}'`);
+    logger.info(`[SERVER] Server is running at 'http://127.0.0.1:${PORT}'`);
+    logger.info(`[SERVER] NODE_ENV : ${NODE_ENV}`);
 };
 
 /**
@@ -18,7 +20,7 @@ const main = () => {
         app.listen(parseInt(PORT), "0.0.0.0", callback);
     } catch (error) {
         //The application will stop if there is an error
-        console.log(error);
+        console.error(error);
         process.exit();
     }
 };

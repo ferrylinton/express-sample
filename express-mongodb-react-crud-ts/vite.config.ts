@@ -4,6 +4,13 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'main.html'),
+      },
+    },
+  },
   plugins: [react()],
   resolve: {
     alias: {

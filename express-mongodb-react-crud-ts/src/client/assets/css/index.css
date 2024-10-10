@@ -237,7 +237,6 @@ svg {
 .alert {
     display: inline-block;
     width: 100%;
-    color: var(--inverse-text);
     border-radius: 0.2rem;
     animation: fadeIn;
     animation-duration: 2s;
@@ -269,20 +268,22 @@ svg {
     text-align: center;
     font-size: 2rem;
     font-weight: lighter;
-    color: hsla(var(--inverse-text-h), var(--inverse-text-s), var(--inverse-text-l), 0.5);
     cursor: pointer;
+    opacity: 0.5;
 }
 
 .alert-close:hover{
-    color: hsla(var(--inverse-text-h), var(--inverse-text-s), var(--inverse-text-l), 0.8);
+    opacity: 1;
 }
 
 .alert-success {
-    background-color: var(--accent);
-    box-shadow: var(--accent) 0 5px 10px -5px;
+    color: hsl(var(--success-h), var(--success-s), 90%);
+    background-color: var(--success);
+    box-shadow: var(--success) 0 5px 10px -5px;
 }
 
 .alert-danger {
+    color: hsl(var(--danger-h), var(--danger-s), 90%);
     background-color: var(--danger);
     box-shadow: var(--danger) 0 5px 10px -5px;
 }
@@ -452,22 +453,32 @@ svg {
     font-weight: normal;
 }
 
+.skeleton-line, .skeleton-square{
+    --skeleton1: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 10%));
+    --skeleton2: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 30%));
+}
+
+.dark .skeleton-line, .skeleton-square{
+    --skeleton1: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 30%));
+    --skeleton2: hsl(var(--background-h), var(--background-s), calc(var(--background-l) + 10%));
+}
+
 .skeleton-square {
     width: 40px;
     height: 40px;
     border-radius: 5px;
-    background: rgba(130, 130, 130, 0.2);
-    background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(130, 130, 130, 0.2)), color-stop(18%, rgba(130, 130, 130, 0.3)), color-stop(33%, rgba(130, 130, 130, 0.2)));
-    background: linear-gradient(to right, rgba(130, 130, 130, 0.2) 8%, rgba(130, 130, 130, 0.3) 18%, rgba(130, 130, 130, 0.2) 33%);
+    background: var(--skeleton1);
+    background: -webkit-gradient(linear, left top, right top, color-stop(8%, var(--skeleton1)), color-stop(18%, var(--skeleton2)), color-stop(33%, var(--skeleton1)));
+    background: linear-gradient(to right, var(--skeleton1) 8%, var(--skeleton2) 18%, var(--skeleton1) 33%);
     background-size: 800px 100px;
     animation: wave-squares 2s infinite ease-out;
 }
 .skeleton-line {
     height: 12px;
     border-radius: 2px;
-    background: rgba(130, 130, 130, 0.2);
-    background: -webkit-gradient(linear, left top, right top, color-stop(8%, rgba(130, 130, 130, 0.2)), color-stop(18%, rgba(130, 130, 130, 0.3)), color-stop(33%, rgba(130, 130, 130, 0.2)));
-    background: linear-gradient(to right, rgba(130, 130, 130, 0.2) 8%, rgba(130, 130, 130, 0.3) 18%, rgba(130, 130, 130, 0.2) 33%);
+    background: var(--skeleton1);
+    background: -webkit-gradient(linear, left top, right top, color-stop(8%, var(--skeleton1)), color-stop(18%, var(--skeleton2)), color-stop(33%, var(--skeleton1)));
+    background: linear-gradient(to right, var(--skeleton1) 8%, var(--skeleton2) 18%, var(--skeleton1) 33%);
     background-size: 800px 100px;
     animation: wave-lines 2s infinite ease-out;
 }

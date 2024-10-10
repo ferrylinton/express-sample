@@ -1,4 +1,5 @@
 import todoRouter from '@src/server/routers/todo-router';
+import reactRouter from '@src/server/routers/react-router';
 import express from "express";
 import favicon from 'express-favicon';
 import fs from 'fs';
@@ -7,8 +8,9 @@ import path from 'path';
 import { authMiddleware } from './middlewares/auth-minddleware';
 import { rateLimitMiddleware } from './middlewares/rate-limit-minddleware';
 import { restErrorHandler } from './middlewares/rest-middleware';
-import { JWT_EXPIRES_IN, JWT_SECRET } from './utils/env-constant';
+import { JWT_EXPIRES_IN, JWT_SECRET, NODE_ENV } from './utils/env-constant';
 import { getClientIp } from './utils/ip-util';
+import logger from './utils/winston';
 
 let indexContent: String;
 const app = express();
@@ -33,21 +35,8 @@ app.get("/api/ping", (_, res) => {
 app.use('/api', todoRouter);
 app.use('/api', restErrorHandler);
 
-const isProduction = process.env.NODE_ENV === "production";
-console.log("process.env.NODE_ENV : ", process.env.NODE_ENV);
-
-if (isProduction) {
-  app.get('*', (req, res) => {
-
-    const ip = getClientIp(req);
-    const token = jwt.sign({ ip }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
-
-    if (!indexContent) {
-      indexContent = fs.readFileSync(path.join(__dirname, 'index.html'), "utf8");
-    }
-
-    res.send(indexContent.replace("###TOKEN###", token));
-  });
+if (NODE_ENV === "production") {
+  app.use(reactRouter);
 }
 
 export default app;

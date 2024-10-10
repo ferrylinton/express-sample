@@ -16,7 +16,7 @@ export const HomePage = () => {
 
     const [total, setTotal] = useState<number>(0);
 
-    const {alert} = useAlertStore();
+    const { alert } = useAlertStore();
 
     const loadTodoes = () => {
         todoService.find()
@@ -31,9 +31,9 @@ export const HomePage = () => {
                 console.error(err);
                 const error = err as any;
 
-                if(error.response?.data?.code){
-                    alert.error(intl.formatMessage({id : error.response.data.code}))
-                }else{
+                if (error.response?.data?.code) {
+                    alert.error(intl.formatMessage({ id: error.response.data.code }))
+                } else {
                     alert.error(error.message);
                 }
             });
@@ -53,9 +53,17 @@ export const HomePage = () => {
                     <FormattedMessage id="newTask" />
                 </Link>
             </div>
+
             <div className="todo-list">
                 <table>
                     <tbody>
+                        {
+                            todoes && todoes.length === 0 && <tr>
+                                <td>
+                                    <div style={{padding: "1rem"}}><FormattedMessage id="noRecords" /></div>
+                                </td>
+                            </tr>
+                        }
                         {
                             todoes && todoes.map((todo, index) => {
                                 return <TodoItem
@@ -66,7 +74,7 @@ export const HomePage = () => {
                             })
                         }
                         {
-                            !todoes && ["1", "2", "3"].map((num) => {
+                            !todoes && ["1", "2"].map((num) => {
                                 return <tr key={num}>
                                     <td>{num}</td>
                                     <td>

@@ -39,6 +39,7 @@ export const LocaleMenu = () => {
             <a onClick={(e) => {
               e.preventDefault();
               setLocale('en');
+              setChecked(false);
             }}>
               <EnglishIcon />
               <span>English</span>
@@ -47,7 +48,8 @@ export const LocaleMenu = () => {
           <li>
             <a onClick={(e) => {
               e.preventDefault();
-              setLocale('id')
+              setLocale('id');
+              setChecked(false);
             }}>
               <IndonesiaIcon />
               <span>Indonesia</span>

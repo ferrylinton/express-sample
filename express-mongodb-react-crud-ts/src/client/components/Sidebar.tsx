@@ -50,9 +50,10 @@ export const Sidebar = () => {
                         <h1><FormattedMessage id="builtWith" /></h1>
                         <ul>
                             <li>ExpressJS</li>
-                            <li>Handlebars</li>
-                            <li>i18n</li>
-                            <li>Mysql</li>
+                            <li>Mongodb</li>
+                            <li>Redis</li>
+                            <li>ReactJS</li>
+                            <li>Zustand</li>
                             <li>Webpack</li>
                             <li>Typescript</li>
                             <li>Axios</li>
