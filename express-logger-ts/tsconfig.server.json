@@ -1,0 +1,30 @@
+{
+  "exclude": [
+    "./src/client/",
+  ],
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "strict": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": [
+        "src/*"
+      ],
+      "@types/*": [
+        "src/types/*"
+      ],
+      "@services/*": [
+        "src/server/services/*"
+      ],
+      "@validations/*": [
+        "src/server/validations/*"
+      ],
+      "@utils/*": [
+        "src/server/utils/*"
+      ]
+    },
+  }
+}

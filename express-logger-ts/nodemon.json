@@ -1,0 +1,10 @@
+{
+  "watch": [
+    "src/server/**"
+  ],
+  "ext": "[j|t]s",
+  "ignore": [
+    "*.log"
+  ],
+  "exec": "tsx --tsconfig tsconfig.server.json ./src/server/server.ts"
+}

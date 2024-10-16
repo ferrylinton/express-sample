@@ -1,21 +1,29 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import virtualHtml from 'vite-plugin-virtual-html';
 import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  build: {
-    rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'main.html'),
+  plugins: [
+    react(),
+    virtualHtml({
+      pages: {
+        main: '/src/main.html',
       },
-    },
-  },
-  plugins: [react()],
+      indexPage: 'main'
+    })
+  ],
   resolve: {
     alias: {
       "@src": path.resolve(__dirname, "src"),
       "@types": path.resolve(__dirname, "src", "types"),
     }
   },
+  server: {
+    port: 3000,
+    proxy: {
+      '/api': 'http://localhost:5000'
+    }
+  }
 });
