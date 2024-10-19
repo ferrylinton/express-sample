@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser';
 import express from "express";
 import favicon from 'express-favicon';
 import path from 'path';
-import { authMiddleware } from './middlewares/auth-minddleware';
+import { authMiddleware } from './middlewares/auth-middleware';
 import { rateLimitMiddleware } from './middlewares/rate-limit-minddleware';
 import { reactMiddleware } from './middlewares/react-middleware';
 import { restErrorHandler } from './middlewares/rest-middleware';
@@ -31,8 +31,7 @@ app.get("/api/ping", (_, res) => {
 // map router to express application
 app.use('/api', todoRouter);
 app.use('/api', requestInfoRouter);
-app.use('/api', restErrorHandler);
-
-app.use("*", reactMiddleware);
+app.use(restErrorHandler);
+app.use(reactMiddleware);
 
 export default app;

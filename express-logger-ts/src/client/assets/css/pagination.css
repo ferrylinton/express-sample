@@ -1,0 +1,48 @@
+.pagination{
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.pagination ul{
+    margin: 0 1rem;
+    display: flex;
+    gap: 0.3rem;
+}
+
+.pagination button{
+    padding: 0.2rem 0.5rem;
+    color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 60%));
+}
+
+.pagination button:hover{
+    color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 70%));
+}
+
+.pagination button:disabled{
+    cursor: not-allowed;
+    color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 30%));
+}
+
+.pagination ul li button{
+    padding: 0;
+    cursor: pointer;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    border: solid 1px hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 15%));
+}
+
+.pagination ul li button:hover{
+    border: solid 1px hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 25%));
+    background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 5%));
+}
+
+.pagination ul li button.active{
+    cursor: not-allowed;
+    border: solid 1px hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 35%));
+    background-color: hsl(var(--background-h), var(--background-s), calc(var(--background-l) - 15%));
+}

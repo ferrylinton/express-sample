@@ -60,6 +60,7 @@
     "zustand": "^5.0.0-rc.2"
   },
   "dependencies": {
-    "cookie-parser": "^1.4.7"
+    "cookie-parser": "^1.4.7",
+    "react-headless-pagination": "^1.1.6"
   }
 }

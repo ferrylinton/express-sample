@@ -16,7 +16,6 @@ export default function Layout() {
     return (
 
         <AppProvider>
-            <Sidebar />
             <main className="main">
                 <nav className="nav">
                     <div className="nav-content">

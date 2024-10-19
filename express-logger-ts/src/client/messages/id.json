@@ -12,7 +12,6 @@
     "cancel": "Batal",
     "ok": "OK",
 	"save": "Simpan",
-    "createdAt": "Tgl Dibuat",
     "updatedAt": "Tgl Diubah",
     "back": "Kembali",
     "delete": "Hapus",
@@ -31,5 +30,11 @@
     "tooManyRequest": "Terlalu banyak permintaan, silakan dicoba beberapa saat lagi",
     "invalidToken": "Token tidak valid",
     "noTokenProvided": "Tidak ada token yang disediakan",
-    "invalidIp": "Token memiliki IP yang tidak valid"
+    "invalidIp": "Token memiliki IP yang tidak valid",
+    "ip": "IP",
+    "app": "Aplikasi",
+    "url": "URL",
+    "method": "Metode",
+    "createdAt": "Tgl Dibuat",
+    "keyword": "Kata kunci"
 }

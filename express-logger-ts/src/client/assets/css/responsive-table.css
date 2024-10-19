@@ -1,0 +1,96 @@
+.responsive-table {
+    width: 100%;
+}
+
+.responsive-table table {
+    width: 100%;
+}
+
+.responsive-table table thead {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.responsive-table table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+}
+
+.responsive-table table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+    padding: 0.4rem 0.6rem;
+}
+
+.responsive-table table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.sort {
+    padding: 10px 30px 10px 10px;
+    position: relative;
+    cursor: pointer;
+}
+.sort::before, .sort::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    border: 4px solid transparent;
+}
+.sort::before {
+    border-bottom-color: #bdbdbd;
+    margin-top: -8px;
+}
+.sort::after {
+    border-top-color: #bdbdbd;
+    margin-top: 1px;
+}
+.sort.asc::before {
+    border-width: 6px;
+    margin-top: -9px;
+    right: 10px;
+    border-bottom-color: #3f3f3f;
+}
+.sort.asc::after {
+    content: none;
+}
+.sort.desc::before {
+    content: none;
+}
+.sort.desc::after {
+    border-width: 6px;
+    margin-top: -2px;
+    right: 10px;
+    border-top-color: #3f3f3f;
+}
+
+
+@media (min-width: 768px) {
+
+    .responsive-table table thead {
+        position: static;
+    }
+
+    .responsive-table table tr {
+        display: table-row;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .responsive-table table td {
+        display: table-cell;
+        text-align: left;
+    }
+
+    .responsive-table table td::before {
+        display: none;
+    }
+}

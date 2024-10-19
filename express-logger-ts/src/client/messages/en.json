@@ -12,7 +12,6 @@
     "cancel": "Cancel",
     "ok": "OK",
     "save": "Save",
-    "createdAt": "Created At",
     "updatedAt": "Updated At",
     "back": "Back",
     "delete": "Delete",
@@ -31,5 +30,11 @@
     "tooManyRequest": "Too many requests, please try again later",
     "invalidToken": "Invalid token",
     "noTokenProvided": "No token provided",
-    "invalidIp": "Token has invalid IP"
+    "invalidIp": "Token has invalid IP",
+    "ip": "IP",
+    "app": "Application",
+    "url": "URL",
+    "method": "Method",
+    "createdAt": "Created At",
+    "keyword": "Keyword"
 }

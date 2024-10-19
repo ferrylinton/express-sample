@@ -9,7 +9,9 @@
 @import './sidebar.css';
 @import './dropdown.css';
 @import './toggle-theme-classic.css';
-@import './todo.css';
+@import './responsive-table.css';
+@import './search-form.css';
+@import './pagination.css';
 
 #root {
     font-family: "Poppins", sans-serif;
@@ -101,6 +103,10 @@ svg {
     line-height: 1;
     font-size: 2rem;
     margin: 0 1rem;
+}
+
+.rotate_180{
+    rotate: 180deg;
 }
 
 /* Toggle Menu */

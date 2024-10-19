@@ -11,6 +11,6 @@ const postRequestInfoHandler = async (req: Request, res: Response, next: NextFun
 }
 
 const router = express.Router();
-router.post('/requestinfo', postRequestInfoHandler);
+router.post('/requestinfos', postRequestInfoHandler);
 
 export default router;

@@ -1,10 +1,14 @@
-import * as todoService from "../services/todo-service";
-import { Todo } from '../../types/todo-type';
+import { Pageable, Pagination, RequestParams } from '@src/types/common-type';
+import { RequestInfo } from '@src/types/request-info';
 import { useEffect, useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { Link, useLocation } from 'react-router-dom';
-import { TodoItem } from '../components/TodoItem';
+import { useIntl } from 'react-intl';
+import { useLocation } from 'react-router-dom';
+import { RequestInfoList } from '../components/RequestInfoList';
+import { SearchForm } from '../components/SearchForm';
 import { useAlertStore } from "../hooks/alert-store";
+import * as requestInfoService from "../services/request-info-service";
+import { Pager } from '../components/Pager';
+
 
 export const HomePage = () => {
 
@@ -12,19 +16,25 @@ export const HomePage = () => {
 
     const location = useLocation();
 
-    const [todoes, setTodoes] = useState<Todo[]>();
+    const [result, setResult] = useState<Pageable<RequestInfo>>();
 
-    const [total, setTotal] = useState<number>(0);
+    const [pagination, setPagination] = useState<Pagination>({ total: 0, totalPage: 0, page: 0, pageSize: 0 });
+
+    const goToPage = (page: number) => {
+        loadRequestInfos({ page })
+    };
 
     const { alert } = useAlertStore();
 
-    const loadTodoes = () => {
-        todoService.find()
+    const loadRequestInfos = (params: RequestParams) => {
+        setResult(undefined);
+        requestInfoService.find(params)
             .then(({ status, data }) => {
                 setTimeout(() => {
                     if (status === 200) {
-                        setTotal(data.total);
-                        setTodoes(data.todoes);
+                        console.log(data);
+                        setResult(data);
+                        setPagination(data.pagination);
                     }
                 }, 500);
             }).catch(err => {
@@ -34,65 +44,20 @@ export const HomePage = () => {
                 if (error.response?.data?.code) {
                     alert.error(intl.formatMessage({ id: error.response.data.code }))
                 } else {
-                    alert.error(error.message);
+                    alert.error(error.response.data.message || error.message);
                 }
             });
     }
 
     useEffect(() => {
-        loadTodoes();
+        loadRequestInfos({});
     }, [location]);
 
     return (
         <>
-            <div className="todo-list-toolbar">
-                <div className="total">
-                    <FormattedMessage id="total" values={{ total }} />
-                </div>
-                <Link to={"/add"} className="btn btn-primary">
-                    <FormattedMessage id="newTask" />
-                </Link>
-            </div>
-
-            <div className="todo-list">
-                <table>
-                    <tbody>
-                        {
-                            todoes && todoes.length === 0 && <tr>
-                                <td>
-                                    <div style={{padding: "1rem"}}><FormattedMessage id="noRecords" /></div>
-                                </td>
-                            </tr>
-                        }
-                        {
-                            todoes && todoes.map((todo, index) => {
-                                return <TodoItem
-                                    key={index}
-                                    index={index}
-                                    todo={todo}
-                                />
-                            })
-                        }
-                        {
-                            !todoes && ["1", "2"].map((num) => {
-                                return <tr key={num}>
-                                    <td>{num}</td>
-                                    <td>
-                                        <span className="skeleton-line"></span>
-                                        <em className="skeleton-line" style={{ width: 100 }}></em>
-                                    </td>
-                                    <td>
-                                        <div className="action">
-                                            <div className="skeleton-square"></div>
-                                            <div className="skeleton-square"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            })
-                        }
-                    </tbody>
-                </table>
-            </div>
+            <SearchForm />
+            <RequestInfoList result={result} />
+            <Pager pagination={pagination} goToPage={goToPage} />
         </>
     )
 }

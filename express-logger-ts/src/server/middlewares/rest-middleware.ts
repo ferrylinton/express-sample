@@ -4,7 +4,6 @@ import logger from "@src/server/utils/winston";
 
 export const restErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     try {
-        console.error(err);
         logger.error(err);
 
         if (err instanceof MongoServerError) {
@@ -30,7 +29,6 @@ export const restErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
             res.json({ "message": err.message });
         }
     } catch (error) {
-        console.error(error);
         logger.error(error);
 
         res.status(err.status || 500);
